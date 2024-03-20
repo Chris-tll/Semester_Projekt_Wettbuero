@@ -25,11 +25,19 @@ public class UserService {
     public User getUserById(String id) { return userRepository.findById(id).orElse(null); }
 
     //CheckPassword
-    public boolean checkPassword(String id, String password) {
+    public boolean checkPassword(String email, String password) {
+        String id = " ";
+        for(User u : getAllUser()) {
+            if(u.getEmail().equals(email)){
+                id = u.getId();
+                break;
+            }
+        }
         if(userRepository.existsById(id)){
             User u = getUserById(id);
             System.out.println(password);
             if(passwordEncoder.matches(password, u.getPassword())) {
+                System.out.println("Hallo");
                 return true;
             }
         }

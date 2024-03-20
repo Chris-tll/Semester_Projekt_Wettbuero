@@ -31,6 +31,9 @@ public class UserController {
     @GetMapping("/email/{email}")
     public User getUserByEmail(@PathVariable String email) { return userService.getUserByEmail(email); }
 
+    @GetMapping("/password/{email}/{password}")
+    public boolean comparePassword(@PathVariable String email, @PathVariable String password) { return userService.checkPassword(email, password); }
+
     //MAPPING POST
     @PostMapping
     public User createUser( @Valid @RequestBody User user) { return userService.createUser(user); }

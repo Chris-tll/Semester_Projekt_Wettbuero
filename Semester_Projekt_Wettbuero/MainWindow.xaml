@@ -1,0 +1,177 @@
+﻿<Window x:Class="Semester_Projekt_Wettbuero.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Semester_Projekt_Wettbuero"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <Grid x:Name="login_grid" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="1" Content="LOGIN" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="45"/>
+            <Button x:Name="Btn_Login" Grid.Column="1" Content="Login" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="380" Margin="0,33,0,0" Click="Button_Click" Height="25"/>
+            <TextBox x:Name="TextBox_Name" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="Enter your email or username" VerticalAlignment="Center" Width="333" Margin="48,0,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0"/>
+            <Image Grid.Column="1" HorizontalAlignment="Left" Height="46" Margin="8,25,0,0" VerticalAlignment="Top" Width="45" Grid.Row="1" Source="person-circle-outline.svg"/>
+            <Image HorizontalAlignment="Left" Height="32" Margin="13,0,0,0" VerticalAlignment="Center" Width="42" Source="/user_icon.png" Grid.Column="1" Grid.Row="1"/>
+            <Image HorizontalAlignment="Left" Height="40" Margin="16,98,0,0" VerticalAlignment="Top" Width="29" Source="/lock_icon.png" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="1" Margin="50,59,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Label x:Name="Label_Password_Placeholder" Grid.Column="1" Content="Enter your password" HorizontalAlignment="Left" Margin="48,93,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Grid.RowSpan="2"/>
+            <PasswordBox x:Name="PasswordBox_Password" Grid.Column="1" HorizontalAlignment="Left" Margin="50,6,0,0" Grid.Row="2" VerticalAlignment="Top" Width="331" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="1" Margin="50,23,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Label Grid.Column="1" Content="No member yet? Click" HorizontalAlignment="Left" Margin="64,70,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150"/>
+            <Button x:Name="Btn_register" Grid.Column="1" Content="here" HorizontalAlignment="Center" Margin="0,74,0,0" Grid.Row="2" VerticalAlignment="Top" Width="28" Background="Transparent" BorderThickness="0" FontStyle="Italic" FontWeight="Bold" Click="Btn_register_Click"/>
+        </Grid>
+
+        <Grid x:Name="register_grid" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="1" Content="REGISTER" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="45"/>
+            <Button x:Name="Btn_Register" Content="Register" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="399" Margin="0,90,0,0" Click="On_Btn_Register" Height="25" Grid.Column="1"/>
+            <Label x:Name="Label_Firstname" Grid.Column="1" Content="Enter your firstname" HorizontalAlignment="Left" Margin="46,97,0,0" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="176" Grid.RowSpan="2"/>
+            <TextBox x:Name="TextBox_Firstname" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Margin="48,2,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_FirstDigit_ToUpper" LostFocus="TextBox_LostFocus_FirstDigit_ToUpper" TextChanged="OnTextBoxGotInput"/>
+            <Image Grid.Column="1" HorizontalAlignment="Left" Height="46" Margin="8,93,0,0" VerticalAlignment="Top" Width="45" Source="person-circle-outline.svg" Grid.RowSpan="2"/>
+            <Image HorizontalAlignment="Left" Height="32" Margin="11,2,0,0" VerticalAlignment="Top" Width="42" Source="/user_icon.png" Grid.Column="1" Grid.Row="1"/>
+            <Image HorizontalAlignment="Left" Height="31" Margin="18,98,0,0" VerticalAlignment="Top" Width="29" Source="/lock_icon.png" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,28,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Label x:Name="Label_SetPass" Grid.Column="1" Content="Enter your password" HorizontalAlignment="Left" Margin="48,94,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Grid.RowSpan="2"/>
+            <PasswordBox x:Name="PasswordBox_Password_Set" Grid.Column="1" HorizontalAlignment="Left" Margin="50,4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="332" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent"/>
+            <Label Grid.Column="1" Content="Already have an account? Click here to " HorizontalAlignment="Left" Margin="66,120,0,0" Grid.Row="4" VerticalAlignment="Top" Width="244"/>
+            <Button x:Name="deeeee" Grid.Column="1" Content="login" HorizontalAlignment="Left" Margin="278,124,0,0" Grid.Row="4" VerticalAlignment="Top" Width="31" Background="Transparent" BorderThickness="0" FontStyle="Italic" FontWeight="Bold" Click="Btn_register_Click"/>
+            <Label x:Name="Label_Lastname" Grid.Column="1" Content="Enter your lastname" HorizontalAlignment="Left" Margin="46,35,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="190"/>
+            <TextBox x:Name="TextBox_Lastname" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,40,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_FirstDigit_ToUpper" LostFocus="TextBox_LostFocus_FirstDigit_ToUpper" TextChanged="OnTextBoxGotInput"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,66,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Label x:Name="Label_Username" Grid.Column="1" Content="Enter your username" HorizontalAlignment="Left" Margin="46,73,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="190" Grid.RowSpan="2"/>
+            <TextBox x:Name="TextBox_Username" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,78,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" Grid.RowSpan="2" TextChanged="OnTextBoxGotInput"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,5,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Label x:Name="Label_Age" Grid.Column="1" Content="Enter your age" HorizontalAlignment="Left" Margin="46,12,0,0" Grid.Row="2" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="138"/>
+            <TextBox x:Name="TextBox_Age" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,17,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_Digits" TextChanged="OnTextBoxGotInput"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,43,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <ComboBox x:Name="ComboBox_gender" Grid.Column="1" HorizontalAlignment="Left" Margin="50,58,0,0" Grid.Row="2" VerticalAlignment="Top" Width="331" Background="Transparent" BorderThickness="0" FontSize="18" Text="Choose your gender"/>
+            <Label x:Name="Label_Phone" Grid.Column="1" Content="Enter your phone number" HorizontalAlignment="Left" Margin="46,4,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="246"/>
+            <TextBox x:Name="TextBox_Phone" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,9,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_Digits" TextChanged="OnTextBoxGotInput"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,35,0,0" Grid.Row="3" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Image HorizontalAlignment="Left" Height="26" Margin="15,10,0,0" VerticalAlignment="Top" Width="34" Source="/phone_icon.png" Grid.Column="1" Grid.Row="3"/>
+            <Image x:Name="email" HorizontalAlignment="Left" Height="32" Margin="13,48,0,0" VerticalAlignment="Top" Width="40" Source="/email_icon.png" Grid.Column="1" Grid.Row="3"/>
+            <Label x:Name="Label_Email" Grid.Column="1" Content="Enter your email" HorizontalAlignment="Left" Margin="46,43,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="35" Width="138"/>
+            <TextBox x:Name="TextBox_Email" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,48,0,0" Height="32" FontSize="18" FontStyle="Italic" Background="Transparent" BorderThickness="0" TextChanged="OnTextBoxGotInput"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,74,0,0" Grid.Row="3" Stroke="Black" VerticalAlignment="Top" Width="332" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="49,25,0,0" Grid.Row="4" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Label x:Name="Label_ConfirmPass" Grid.Column="1" Content="Confirm your password" HorizontalAlignment="Left" Margin="48,37,0,0" Grid.Row="4" VerticalAlignment="Top" FontStyle="Italic" FontSize="18"/>
+            <PasswordBox x:Name="PasswordBox_Password_Confirm" Grid.Column="1" HorizontalAlignment="Left" Margin="50,44,0,0" Grid.Row="4" VerticalAlignment="Top" Width="332" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="49,67,0,0" Grid.Row="4" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Image HorizontalAlignment="Left" Height="31" Margin="17,40,0,0" VerticalAlignment="Top" Width="29" Source="/confirm_icon.png" Grid.Column="1" Grid.Row="4"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="confirm_icon.png" />
+    <None Remove="email_icon.png" />
+    <None Remove="lock_icon.png" />
+    <None Remove="phone_icon.png" />
+    <None Remove="user_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="confirm_icon.png" />
+    <Resource Include="email_icon.png" />
+    <Resource Include="lock_icon.png" />
+    <Resource Include="phone_icon.png" />
+    <Resource Include="user_icon.png" />
+  </ItemGroup>
+
+</Project>
