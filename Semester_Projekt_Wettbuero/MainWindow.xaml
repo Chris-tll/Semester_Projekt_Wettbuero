@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Semester_Projekt_Wettbuero"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="900" Width="1500"
+        WindowState="Maximized"
+        WindowStyle="None">
     <Grid>
         <Grid x:Name="login_grid" Visibility="Hidden">
             <Grid.ColumnDefinitions>
@@ -52,7 +54,9 @@
             <Button x:Name="Btn_register" Grid.Column="1" Content="here" HorizontalAlignment="Center" Margin="0,74,0,0" Grid.Row="2" VerticalAlignment="Top" Width="28" Background="Transparent" BorderThickness="0" FontStyle="Italic" FontWeight="Bold" Click="Btn_register_Click"/>
         </Grid>
 
-        <Grid x:Name="register_grid" >
+
+
+        <Grid x:Name="register_grid" Visibility="Hidden" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="400"/>
@@ -172,6 +176,120 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
             <Image HorizontalAlignment="Left" Height="31" Margin="17,40,0,0" VerticalAlignment="Top" Width="29" Source="/confirm_icon.png" Grid.Column="1" Grid.Row="4"/>
+        </Grid>
+
+
+
+        <Grid x:Name="game_grid" Visibility="Hidden">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Height="100" Fill="#FFFA0505" Grid.ColumnSpan="6" Grid.Row="0">
+                    <!-- Fügen Sie den Schatteneffekt zum Rechteck hinzu -->
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Black" Opacity="0.5"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Label x:Name="Label_StartPage_BettingOffice" Grid.Column="2" Content="Betting office" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="434" FontFamily="Stencil" Margin="0,-3,0,0"/>
+                <TextBlock x:Name="TextBlock_StartPage_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Center" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,0,0,0"/>
+                <TextBlock x:Name="TextBlock_StartPage_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Center" FontFamily="Stencil" FontSize="20" Width="192" Margin="3,0,0,0"/>
+                <Rectangle Grid.Column="4" HorizontalAlignment="Left" Height="720" Margin="150,45,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2" Grid.RowSpan="5">
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="50" Color="Black" Opacity="0.5"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Label x:Name="Label_ActiveBets" Grid.Column="4" Content="Active Bets" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="20" Width="130" FontFamily="Stencil" Margin="228,63,0,0" Grid.ColumnSpan="2"/>
+                <ListView x:Name="ListView_ActiveBets" Grid.Column="4" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="182,0,30,88" Grid.RowSpan="4">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="Button_DogRace" Grid.Column="3" Content="Dog Race" HorizontalAlignment="Left" Margin="79,30,0,0" Grid.Row="3" VerticalAlignment="Top" Height="300" Width="300" Grid.ColumnSpan="2" FontSize="25" FontFamily="Stencil"/>
+                <Button x:Name="Button_HorseRace" Grid.Column="1" Content="Horse race" HorizontalAlignment="Left" Margin="294,30,0,0" Grid.Row="3" VerticalAlignment="Top" Height="300" Width="300" Grid.ColumnSpan="2" FontFamily="Stencil" FontSize="25" Click="Button_HorseRace_Click"/>
+                <Button x:Name="Button_SnailRace" Content="Snail race" HorizontalAlignment="Left" Margin="58,30,0,0" Grid.Row="3" VerticalAlignment="Top" Height="300" Width="300" Grid.ColumnSpan="2" FontSize="25" FontFamily="Stencil"/>
+                <Label Content="Choose on which race you want to set your bet" HorizontalAlignment="Left" Margin="58,55,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="25" FontFamily="Stencil" Grid.ColumnSpan="3" Width="652"/>
+                <TextBlock HorizontalAlignment="Left" Margin="60,60,0,0" Grid.Row="5" TextWrapping="Wrap" Text="www.BettingOffice.com" VerticalAlignment="Top" FontSize="15" FontFamily="Stencil" Grid.ColumnSpan="3" Width="574"/>
+                <Label Content="Have you already checked out your statistics and more news on our website?" HorizontalAlignment="Left" Margin="55,14,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Stencil" FontSize="20" Grid.ColumnSpan="4" Width="851"/>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="HorseRace_grid" Visibility="Visible">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Height="100" Fill="#FFFA0505" Grid.ColumnSpan="6" Grid.Row="0">
+                    <!-- Fügen Sie den Schatteneffekt zum Rechteck hinzu -->
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Black" Opacity="0.5"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Label x:Name="Label_Horserace_BettingOffice" Grid.Column="2" Content="Betting office" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="434" FontFamily="Stencil" Margin="0,-3,0,0"/>
+                <TextBlock x:Name="TextBlock_Horserace_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Center" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,0,0,0"/>
+                <TextBlock x:Name="TextBlock_Horserace_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Center" FontFamily="Stencil" FontSize="20" Width="192" Margin="3,0,0,0"/>
+                <Label x:Name="Label_Horserace" Content="Horserace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="434" FontFamily="Stencil" Margin="16,57,0,0" Grid.Row="1"/>
+                <ListView x:Name="ListView_Horserace_Upcoming" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="16,0,0,30" Grid.RowSpan="3" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Horserace_Upcoming_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="ListView_Horserace_Finished" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="79,0,87,30" Grid.RowSpan="3" Grid.Column="2" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label Content="Upcoming races" HorizontalAlignment="Left" Margin="115,76,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="236" FontSize="25"/>
+                <Label Content="Finished races" HorizontalAlignment="Left" Margin="178,78,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="236" FontSize="25" Grid.Column="2"/>
+                <Label Content="Race Informations" HorizontalAlignment="Left" Margin="96,76,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="245" FontSize="25" Grid.Column="4"/>
+                <ListView x:Name="ListView_Horserace_Info" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="0,0,16,30" Grid.RowSpan="4" Grid.Column="4" FontSize="15" FontFamily="Stencil">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="Btn_Horserace_Upcoming_Reload" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="186,72,0,0" Grid.Row="1" VerticalAlignment="Top" Height="37" Width="37" BorderBrush="Transparent" Click="Btn_Horserace_Upcoming_Reload_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/reload_icon.png"/>
+                    </Button.Background>
+                </Button>
+
+            </Grid>
         </Grid>
     </Grid>
 </Window>

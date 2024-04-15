@@ -13,6 +13,7 @@ namespace Semester_Projekt_Wettbuero
         private string email;
         private string username;
         private string password;
+        private double money;
 
         [JsonPropertyName("email")]
         public string Email { get => email; set => email = value; }
@@ -22,5 +23,8 @@ namespace Semester_Projekt_Wettbuero
 
         [JsonPropertyName("password")]
         public string Password { get => password; set => password = value; }
+
+        [JsonPropertyName("money")]
+        public double Money { get => money; set => money = value; }
     }
 }

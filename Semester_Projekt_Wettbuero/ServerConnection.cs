@@ -177,5 +177,74 @@ namespace Semester_Projekt_Wettbuero
             }
 
         }
+
+        //----------------------------HORSRACE----------------------------
+        public async Task<List<Horserace>> GetHorseraceAsync()
+        {
+            string requestUrl = $"{baseUrl}/horserace";
+
+            response = await client.GetAsync(requestUrl);
+
+            if(response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        List<Horserace> participants = JsonSerializer.Deserialize<List<Horserace>>(values);
+                        return participants;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error while reloading races!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        public async Task<Horserace> GetHorseraceByLocation(string loc)
+        {
+            string requestUrl = $"{baseUrl}/horserace/location/{loc}";
+
+            response = await client.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        Horserace? h = JsonSerializer.Deserialize<Horserace>(values);
+                        return h;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Email does not exist!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
     }
 }

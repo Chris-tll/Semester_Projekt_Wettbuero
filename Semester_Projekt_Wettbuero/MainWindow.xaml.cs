@@ -22,26 +22,39 @@ namespace Semester_Projekt_Wettbuero
     /// </summary>
     public partial class MainWindow : Window
     {
+        User? user = null;
+        List<Horserace> hraces = new List<Horserace>();
         public MainWindow()
         {
             InitializeComponent();
             ServerConnection sc = new ServerConnection();
-            login_grid.Visibility = Visibility.Visible;
+            GetAllRaces();
+            //login_grid.Visibility = Visibility.Visible;
             register_grid.Visibility = Visibility.Hidden;
 
             ComboBox_gender.Items.Add("Female");
             ComboBox_gender.Items.Add("Male");
+            //Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            //Application.Current.MainWindow.WindowStyle = WindowStyle.None;
         }
 
         //-------------LOGIN-BTN---------------
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            User? user = await ServerConnection.INSTANCE.GetUserByEmailAsync(TextBox_Name.Text);
+            user = await ServerConnection.INSTANCE.GetUserByEmailAsync(TextBox_Name.Text);
 
             if (user != null)
             {
                 bool password = await ServerConnection.INSTANCE.CheckPasswordAsync(user.Email, PasswordBox_Password.Password);
             }
+
+            login_grid.Visibility = Visibility.Hidden;
+            game_grid.Visibility = Visibility.Visible;
+            Application.Current.MainWindow.Height = 900;
+            Application.Current.MainWindow.Width = 1500;
+
+            TextBlock_StartPage_Money.Text = user?.Money.ToString() + "€";
+            TextBlock_StartPage_Username.Text = user?.Username.ToString();
         }
 
         //-------------PasswordChange Hide Placeholders-------------
@@ -224,5 +237,67 @@ namespace Semester_Projekt_Wettbuero
                 Label_Email.Visibility = Visibility.Visible;
         }
 
+        //-------------Change window when pressing button horserace-------------
+        private async void Button_HorseRace_Click(object sender, RoutedEventArgs e)
+        {
+            LoadAllHorseraces();
+
+            HorseRace_grid.Visibility = Visibility.Visible;
+            game_grid.Visibility = Visibility.Hidden;
+        }
+
+        private async void GetAllRaces()
+        {
+            hraces = await ServerConnection.INSTANCE.GetHorseraceAsync();
+        }
+
+        private async void LoadAllHorseraces()
+        {
+            foreach (Horserace h in hraces)
+            {
+                if (h.status != "FINISHED")
+                {
+                    ListView_Horserace_Upcoming.Items.Add(h.ToString());
+                }
+                else
+                {
+                    ListView_Horserace_Finished.Items.Add(h.ToString());
+                }
+            }
+        }
+
+        private async void ListView_Horserace_Upcoming_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetInfo_Horserace();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetInfo_Horserace();
+        }
+
+        private async void SetInfo_Horserace()
+        {
+            ListView_Horserace_Info.Items.Clear();
+
+            string tmp = "";
+            tmp = ListView_Horserace_Upcoming.SelectedItem as string;
+
+            // Split the string by newline characters ('\n')
+            string[] parts = tmp.Split('\n');
+
+            // Extract the location from the second part after removing leading and trailing spaces
+            string location = parts[1].Substring("Location: ".Length).Trim();
+
+            Horserace h = await ServerConnection.INSTANCE.GetHorseraceByLocation(location);
+
+            ListView_Horserace_Info.Items.Add(h.RaceInformations());
+        }
+
+        private void Btn_Horserace_Upcoming_Reload_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllRaces();
+            LoadAllHorseraces();
+        }
     }
 }
