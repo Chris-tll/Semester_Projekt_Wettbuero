@@ -1,14 +1,18 @@
 package com.example.Semester_Projekt_Wettbuero_Server.Services;
 
+import Entities.Dograce;
 import Entities.Horse;
 import Entities.Horserace;
+import com.example.Semester_Projekt_Wettbuero_Server.CalculateWinner;
 import com.example.Semester_Projekt_Wettbuero_Server.Enums.*;
 import com.example.Semester_Projekt_Wettbuero_Server.Repositories.HorseraceRepository;
+import com.example.Semester_Projekt_Wettbuero_Server.ScheduleTask;
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -17,6 +21,12 @@ public class HorseraceService {
 
     @Autowired
     private HorseraceRepository horseraceRepository;
+
+    private ScheduleTask scheduleTask;
+
+    private CalculateWinner calculateWinner;
+
+    private Horse winner;
 
     //Get all Races
     public List<Horserace> getAllRaces() { return horseraceRepository.findAll(); }
@@ -45,37 +55,42 @@ public class HorseraceService {
     }
 
     //Create Race
-    public Horserace createRace(Horserace race) {
+    public Horserace createRace() {
+        Horserace horserace = new Horserace();
+
         //Random Generator
         Random random = new Random();
 
+        //Set Race Type
+        horserace.setType(RaceType.HORSERACE);
+
         //Generiert eine zufällige Anzahl an Teilnehmer
         int participants = random.nextInt(24) + 2;
-        race.setNum_of_participants(participants);
+        horserace.setNum_of_participants(participants);
 
         //Generiert einen zufälligen Wert für die Auswahl des Wetters
         //Danach wird das Enum an dieser Stelle ausgewählt
         int r = random.nextInt(Weather.values().length);
-        race.setWeather(Weather.values()[r]);
+        horserace.setWeather(Weather.values()[r]);
 
         //Generiert einen zufälligen Wert für die Auswahl des Rennnamen
         //Danach wird das Enum an dieser Stelle ausgewählt
         r = random.nextInt(RaceNames.values().length);
-        race.setName(RaceNames.values()[r].toString());
+        horserace.setName(RaceNames.values()[r].toString());
 
         //Generiert einen zufälligen Wert für die Auswahl des Ortes
         //Danach wird das Enum an dieser Stelle ausgewählt
         r = random.nextInt(RaceLocations.values().length);
-        race.setLocation(RaceLocations.values()[r].toString());
+        horserace.setLocation(RaceLocations.values()[r].toString());
 
         //Generiert einen zufälligen Wert für die Auswahl des Gelände
         //Danach wird das Enum an dieser Stelle ausgewählt
         r = random.nextInt(Terrain.values().length);
-        race.setTerrain(Terrain.values()[r]);
+        horserace.setTerrain(Terrain.values()[r]);
 
         //Generiert einen zufälligen Wert für die Streckenlänge
         r = random.nextInt(350, 6901);
-        race.setLength(r);
+        horserace.setLength(r);
 
         //Neue Liste der Teilnehmer (noch leer)
         List<Horse> participantList = new ArrayList<>();
@@ -84,6 +99,7 @@ public class HorseraceService {
         for(int i = 0; i < participants; i++){
             //Neues Horse-Objekt
             Horse horse = new Horse();
+            horse.setStartNum(i + 1);
 
             //Es wird ein zuäflliger Wert generiert für das erste Prefix des Pferdes
             //Danach wird das Enum an dieser Stelle ausgewählt
@@ -147,12 +163,17 @@ public class HorseraceService {
                     horse.getTrainer_quality() + horse.getJockey_quality() + horse.getExperience_level() + horse.getWeather_influence() + horse.getTerrain_influence());
             horse.setChance_of_winning((int)result);
 
+            //Es wird der Mulitplier berechnet
+            double tmp = 100 * ((double) 1 /horse.getChance_of_winning());
+            tmp = tmp * 100;
+            horse.setMultiplier(Math.round(tmp * 100.0) / 100.0);
+
             //Fertig generiertes Pferd wird zur Liste hinzugefügt
             participantList.add(horse);
         }
 
         //Streckenlänge wird übergeben
-        int trackLength = race.getLength();
+        int trackLength = horserace.getLength();
 
         //Aktueller Zeitpunkt wird gespeichert
         LocalDateTime currentTime = LocalDateTime.now();
@@ -165,7 +186,7 @@ public class HorseraceService {
         LocalDateTime startTime = currentTime.plusMinutes(minutesToAdd);
 
         //Berechne/Schätze die Renndauer basierend auf der Rennstreckenlänge und einer durchschnittlichen Geschwindigkeit von 55 km/h
-        double averageSpeed = 55.0; //in km/h
+        double averageSpeed = 60.0; //in km/h
         double raceDurationHours = (double)trackLength / averageSpeed;
         int raceLength = (int)Math.round(raceDurationHours * 60); //Konvertiert Stunden in Minuten und rundet auf ganze Minuten
 
@@ -176,25 +197,25 @@ public class HorseraceService {
         LocalDateTime endTime = startTime.plusMinutes(raceLength);
 
         //Setzt Start- und Endzeitpunkt des Rennesn sowie die geschätzte Dauer des Rennens
-        race.setStart(startTime);
-        race.setEnd(endTime);
-        race.setEstimatedDuration(raceLength);
+        horserace.setStart(startTime);
+        horserace.setEnd(endTime);
+        horserace.setEstimatedDuration(raceLength);
 
         //Übergibt die vollständige Teilnehmerliste
-        race.setParticipants(participantList);
+        horserace.setParticipants(participantList);
 
         //Setzt Status standardmäßig auf UPCOMING
-        race.setStatus(RaceStatus.UPCOMING);
+        horserace.setStatus(RaceStatus.UPCOMING);
 
         //Erstellt das fertige Rennen
-        return horseraceRepository.save(race);
+        return horseraceRepository.save(horserace);
     }
 
     //Update Race
-    public ResponseEntity<String> updateRace(String id, Horserace race) {
+    public ResponseEntity<String> updateRace(String id, Horserace horserace) {
         if(horseraceRepository.existsById(id)) {
-            race.setId(id);
-            horseraceRepository.save(race);
+            horserace.setId(id);
+            horseraceRepository.save(horserace);
             return ResponseEntity.ok("True");
         }
         return ResponseEntity.ok("False");
@@ -203,5 +224,58 @@ public class HorseraceService {
     //Delete Race
     public void cancelRace(String id) {
         horseraceRepository.deleteById(id);
+    }
+
+    //Timer
+    public void prozessHorserace(){
+        LocalDateTime current = LocalDateTime.now();
+        List<Horserace> checkList = getAllRaces();
+        int count = 0;
+
+        for (Horserace hrace : checkList) {
+            if (hrace.getStatus() != RaceStatus.FINISHED) {
+                count ++;
+            }
+        }
+
+        if (count < 5) {
+            createRace();
+            count = 0;
+        }
+
+        for (Horserace hrace : checkList){
+            if (hrace.getStatus() == RaceStatus.FINISHED) {
+                count ++;
+            }
+        }
+
+        if (count > 5) {
+            Horserace tmp = null;
+
+            for (Horserace hrace : checkList) {
+                if (hrace.getStatus() == RaceStatus.FINISHED) {
+                    tmp = hrace;
+                    break;
+                }
+            }
+            cancelRace(tmp.getId());
+            count = 0;
+        }
+
+        for (Horserace h : getAllRaces()) {
+            if(h.getStart().isBefore(current)){
+                h.setStatus(RaceStatus.ACTIVE);
+                horseraceRepository.save(h);
+            }
+        }
+
+        for (Horserace h : getAllRaces()) {
+            if(h.getEnd().isBefore(current)){
+                h.setStatus(RaceStatus.FINISHED);
+                horseraceRepository.save(h);
+                createRace();
+                //winner = (Horse) calculateWinner.calcWinner(h);
+            }
+        }
     }
 }

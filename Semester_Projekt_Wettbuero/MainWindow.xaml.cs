@@ -24,18 +24,33 @@ namespace Semester_Projekt_Wettbuero
     {
         User? user = null;
         List<Horserace> hraces = new List<Horserace>();
+        List<Dograce> drace = new List<Dograce>();
+        List<Snailrace> srace = new List<Snailrace>();
+
+        string checkListView = "", raceMode = "", participantType = "", raceId = "", raceStatus = "";
+
         public MainWindow()
         {
             InitializeComponent();
             ServerConnection sc = new ServerConnection();
             GetAllRaces();
-            //login_grid.Visibility = Visibility.Visible;
+  
             register_grid.Visibility = Visibility.Hidden;
+            login_grid.Visibility = Visibility.Visible;
 
             ComboBox_gender.Items.Add("Female");
             ComboBox_gender.Items.Add("Male");
-            //Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            //Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+
+            Application.Current.MainWindow.Height = 450;
+            Application.Current.MainWindow.Width = 800;
+        }
+
+        //-------------LOAD ALL RACES---------------
+        private async void GetAllRaces()
+        {
+            hraces = await ServerConnection.INSTANCE.GetHorseraceAsync(); //Loads all Horseraces from db
+            drace = await ServerConnection.INSTANCE.GetDograceAsync(); //Loads all Dograces from db
+            srace = await ServerConnection.INSTANCE.GetSnailraceAsync(); //Loads all Snailraces from db
         }
 
         //-------------LOGIN-BTN---------------
@@ -45,16 +60,18 @@ namespace Semester_Projekt_Wettbuero
 
             if (user != null)
             {
-                bool password = await ServerConnection.INSTANCE.CheckPasswordAsync(user.Email, PasswordBox_Password.Password);
+                bool password = await ServerConnection.INSTANCE.CheckPasswordAsync(user.email, PasswordBox_Password.Password);
             }
 
             login_grid.Visibility = Visibility.Hidden;
             game_grid.Visibility = Visibility.Visible;
-            Application.Current.MainWindow.Height = 900;
-            Application.Current.MainWindow.Width = 1500;
+            //Application.Current.MainWindow.Height = 900;
+            //Application.Current.MainWindow.Width = 1500;
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            Application.Current.MainWindow.WindowStyle = WindowStyle.None;
 
-            TextBlock_StartPage_Money.Text = user?.Money.ToString() + "€";
-            TextBlock_StartPage_Username.Text = user?.Username.ToString();
+            TextBlock_StartPage_Money.Text = user?.money.ToString() + "€";
+            TextBlock_StartPage_Username.Text = user?.username.ToString();
         }
 
         //-------------PasswordChange Hide Placeholders-------------
@@ -82,7 +99,7 @@ namespace Semester_Projekt_Wettbuero
         //-------------Change to Register Window-------------
         private void Btn_register_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Height = 600;
+            Application.Current.MainWindow.Height = 650;
             login_grid.Visibility = Visibility.Hidden;
             register_grid.Visibility = Visibility.Visible;
         }
@@ -235,24 +252,41 @@ namespace Semester_Projekt_Wettbuero
 
             else
                 Label_Email.Visibility = Visibility.Visible;
+
+            if (!string.IsNullOrEmpty(TextBox_Name.Text))
+                Label_Email_Login.Visibility = Visibility.Hidden;
+
+            else
+                Label_Email_Login.Visibility = Visibility.Visible;
         }
 
-        //-------------Change window when pressing button horserace-------------
+        private void BackToOffice(object sender, MouseEventArgs e)
+        {
+            HorseRace_grid.Visibility = Visibility.Hidden;
+            Dograce_grid.Visibility = Visibility.Hidden;
+            Snailrace_grid.Visibility = Visibility.Hidden;
+
+            game_grid.Visibility = Visibility.Visible;
+        }
+
+        //-------------HORSERACE-------------
         private async void Button_HorseRace_Click(object sender, RoutedEventArgs e)
         {
-            LoadAllHorseraces();
+            ReloadAllHorseraces(); //Loads all races function
 
             HorseRace_grid.Visibility = Visibility.Visible;
             game_grid.Visibility = Visibility.Hidden;
+            raceMode = "HORSERACE";
+            participantType = "HORSE";
+            TextBlock_Horserace_Money.Text = user?.money.ToString() + "€";
+            TextBlock_Horserace_Username.Text = user?.username.ToString();
         }
 
-        private async void GetAllRaces()
+        private async void ReloadAllHorseraces()
         {
-            hraces = await ServerConnection.INSTANCE.GetHorseraceAsync();
-        }
+            ListView_Horserace_Finished.Items.Clear();
+            ListView_Horserace_Upcoming.Items.Clear();
 
-        private async void LoadAllHorseraces()
-        {
             foreach (Horserace h in hraces)
             {
                 if (h.status != "FINISHED")
@@ -268,11 +302,13 @@ namespace Semester_Projekt_Wettbuero
 
         private async void ListView_Horserace_Upcoming_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            checkListView = "U";
             SetInfo_Horserace();
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListView_Horserace_Finished_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            checkListView = "F";
             SetInfo_Horserace();
         }
 
@@ -281,8 +317,16 @@ namespace Semester_Projekt_Wettbuero
             ListView_Horserace_Info.Items.Clear();
 
             string tmp = "";
-            tmp = ListView_Horserace_Upcoming.SelectedItem as string;
 
+            if (checkListView.Equals("U"))
+            {
+                tmp = ListView_Horserace_Upcoming.SelectedItem as string;
+            }
+            else
+            {
+                tmp = ListView_Horserace_Finished.SelectedItem as string; 
+            }
+            
             // Split the string by newline characters ('\n')
             string[] parts = tmp.Split('\n');
 
@@ -291,13 +335,210 @@ namespace Semester_Projekt_Wettbuero
 
             Horserace h = await ServerConnection.INSTANCE.GetHorseraceByLocation(location);
 
+            raceId = h.id;
+            raceStatus = h.status;
             ListView_Horserace_Info.Items.Add(h.RaceInformations());
         }
 
-        private void Btn_Horserace_Upcoming_Reload_Click(object sender, RoutedEventArgs e)
+        private void Btn_Horserace_Reload_Races_Click(object sender, RoutedEventArgs e)
         {
             GetAllRaces();
-            LoadAllHorseraces();
+            ReloadAllHorseraces();
+        }
+
+        //When pressing "Set Bet"
+        private async void Btn_Horserace_Bet_Click(object sender, RoutedEventArgs e)
+        {
+            string s = "";
+            s = ListView_Horserace_Upcoming.SelectedItem as string;
+
+            // Split the string by newline characters ('\n')
+            string[] parts = s.Split('\n');
+
+            // Extract the location from the second part after removing leading and trailing spaces
+            string location = parts[1].Substring("Location: ".Length).Trim();
+
+            BetWindow betWindow = new BetWindow(location, user, raceMode, participantType, raceId);
+            betWindow.Show();
+        }
+
+
+        //-------------------------------DOGRACE-------------------------------
+        private void Button_DogRace_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadAllDograces(); //Loads all races function
+
+            Dograce_grid.Visibility = Visibility.Visible;
+            game_grid.Visibility = Visibility.Hidden;
+            raceMode = "DOGRACE";
+            participantType = "DOG";
+            TextBlock_Dograce_Money.Text = user?.money.ToString() + "€";
+            TextBlock_Dograce_Username.Text = user?.username.ToString();
+        }
+
+        private async void ReloadAllDograces()
+        {
+            foreach (Dograce d in drace)
+            {
+                if (d.status != "FINISHED")
+                {
+                    ListView_Dograce_Upcoming.Items.Add(d.ToString());
+                }
+                else
+                {
+                    ListView_Dograce_Finished.Items.Add(d.ToString());
+                }
+            }
+        }
+
+        private async void SetInfo_Dograce()
+        {
+            ListView_Dograce_Info.Items.Clear();
+
+            string tmp = "";
+
+            if (checkListView.Equals("U")) {
+                tmp = ListView_Dograce_Upcoming.SelectedItem as string;
+            }
+            else
+            {
+                tmp = ListView_Dograce_Finished.SelectedItem as string;
+            }
+            
+
+            // Split the string by newline characters ('\n')
+            string[] parts = tmp.Split('\n');
+
+            // Extract the location from the second part after removing leading and trailing spaces
+            string location = parts[1].Substring("Location: ".Length).Trim();
+
+            Dograce d = await ServerConnection.INSTANCE.GetDograceByLocation(location);
+
+            ListView_Dograce_Info.Items.Add(d.RaceInformations());
+        }
+
+        private void ListView_Dograce_Upcoming_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            checkListView = "U";
+            SetInfo_Dograce();
+        }
+
+        private void ListView_Dograce_Finished_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            checkListView = "F";
+            SetInfo_Dograce();
+        }
+
+        private void Btn_Dograce_Reload_Races_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllRaces();
+            ReloadAllHorseraces();
+        }
+
+        //When pressing "Set Bet"
+        private void Btn_Dograce_Bet_Click(object sender, RoutedEventArgs e)
+        {
+            string s = "";
+            s = ListView_Dograce_Upcoming.SelectedItem as string;
+
+            // Split the string by newline characters ('\n')
+            string[] parts = s.Split('\n');
+
+            // Extract the location from the second part after removing leading and trailing spaces
+            string location = parts[1].Substring("Location: ".Length).Trim();
+
+            BetWindow betWindow = new BetWindow(location, user, raceMode, participantType, raceId);
+            betWindow.Show();
+        }
+
+        //-------------------------------SNAILRACE-------------------------------
+        private void Button_SnailRace_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadAllSnailraces(); //Loads all races function
+
+            Snailrace_grid.Visibility = Visibility.Visible;
+            game_grid.Visibility = Visibility.Hidden;
+            raceMode = "SNAILRACE";
+            participantType = "SNAIL";
+            TextBlock_Snailrace_Money.Text = user?.money.ToString() + "€";
+            TextBlock_Snailrace_Username.Text = user?.username.ToString();
+        }
+
+        private async void ReloadAllSnailraces()
+        {
+            foreach (Snailrace s in srace)
+            {
+                if (s.status != "FINISHED")
+                {
+                    Console.WriteLine(s.start);
+                    ListView_Snailrace_Upcoming.Items.Add(s.ToString());
+                }
+                else
+                {
+                    ListView_Snailrace_Finished.Items.Add(s.ToString());
+                }
+            }
+        }
+
+        private async void SetInfo_Snailrace()
+        {
+            ListView_Snailrace_Info.Items.Clear();
+
+            string tmp = "";
+
+            if (checkListView.Equals("U"))
+            {
+                tmp = ListView_Snailrace_Upcoming.SelectedItem as string;
+            }
+            else
+            {
+                tmp = ListView_Snailrace_Finished.SelectedItem as string;
+            }
+           
+
+            // Split the string by newline characters ('\n')
+            string[] parts = tmp.Split('\n');
+
+            // Extract the location from the second part after removing leading and trailing spaces
+            string location = parts[1].Substring("Location: ".Length).Trim();
+
+            Snailrace s = await ServerConnection.INSTANCE.GetSnailraceByLocation(location);
+
+            ListView_Snailrace_Info.Items.Add(s.RaceInformations());
+        }
+
+        private void Btn_Snailrace_Reload_Races_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllRaces();
+            ReloadAllSnailraces();
+        }
+
+        private void ListView_Snailrace_Upcoming_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            checkListView = "U";
+            SetInfo_Snailrace();
+        }
+
+        private void ListView_Snailrace_Finished_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            checkListView = "F";
+            SetInfo_Snailrace();
+        }
+
+        //When pressing "Set Bet"
+        private void Btn_Snailrace_Bet_Click(object sender, RoutedEventArgs e)
+        {
+            string s = "";
+            s = ListView_Snailrace_Upcoming.SelectedItem as string;
+
+            // Split the string by newline characters ('\n')
+            string[] parts = s.Split('\n');
+
+            // Extract the location from the second part after removing leading and trailing spaces
+            string location = parts[1].Substring("Location: ".Length).Trim();
+
+            BetWindow betWindow = new BetWindow(location, user, raceMode, participantType, raceId);
+            betWindow.Show();
         }
     }
 }

@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO.Packaging;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
+using System.Security;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Semester_Projekt_Wettbuero
 {
     class ServerConnection
     {
         public static ServerConnection INSTANCE;
-        string baseUrl = "http://10.10.2.71:8080";
+        string baseUrl = "http://127.0.0.1:8080";
         HttpClient client = new HttpClient();
         HttpResponseMessage response = new HttpResponseMessage();
 
@@ -22,6 +26,7 @@ namespace Semester_Projekt_Wettbuero
             INSTANCE = this;
         }
 
+        //----------------------------USER----------------------------
         public async Task<bool> CreateUser(string firstname, string lastname,
             string username, string gender, int age, string phone, string email, string password)
         {
@@ -178,6 +183,94 @@ namespace Semester_Projekt_Wettbuero
 
         }
 
+        //----------------------------BETS----------------------------
+        public async Task<List<Bet>> GetBetsById(string id)
+        {
+            string requestUrl = $"{baseUrl}/bet/{id}";
+
+            response = await client.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        List<Bet>? bets = JsonSerializer.Deserialize<List<Bet>>(values);
+                        return bets;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Bets do not exist!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        public async Task<bool> CreateBet(double money_bet, string participantType,
+            string participantName, string raceType, string raceId, string userId, string status)
+        {
+            string apiUrl = baseUrl + "/bet";
+
+            try
+            {
+                List<Bet> bets = await GetBetsById(userId);
+
+                foreach (Bet bet in bets)
+                {
+                    if (bet.raceId.Equals(raceId))
+                    {
+                        MessageBox.Show("You can not bet on the same race twice!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }                   
+                }
+                var setBet = new
+                {
+                    money_bet = money_bet,
+                    participantType = participantType,
+                    participantName = participantName,
+                    raceType = raceType,
+                    raceId = raceId,
+                    userId = userId,
+                    status = status,
+                };
+
+                using (var httpClient = new HttpClient())
+                {
+                    var content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(setBet), Encoding.UTF8, "application/json");
+
+                    var response = await httpClient.PostAsync(apiUrl, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Bet successfully created!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Failes to create Bet! Status Code: {response.StatusCode}");
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occured! Error: {ex.Message}");
+                return false;
+            }
+        }
+
         //----------------------------HORSRACE----------------------------
         public async Task<List<Horserace>> GetHorseraceAsync()
         {
@@ -193,6 +286,12 @@ namespace Semester_Projekt_Wettbuero
                     if (values != "")
                     {
                         List<Horserace> participants = JsonSerializer.Deserialize<List<Horserace>>(values);
+
+                        foreach (Horserace hrace in participants)
+                        {
+                            hrace.racestart = convertDateTime(hrace.racestart);
+                        }
+
                         return participants;
                     }
                     else
@@ -228,6 +327,170 @@ namespace Semester_Projekt_Wettbuero
                     {
                         Horserace? h = JsonSerializer.Deserialize<Horserace>(values);
                         return h;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Email does not exist!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        public string convertDateTime(string value)
+        {
+            DateTime javaDateTime = DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+
+            // Formatieren und anzeigen des Datums und der Uhrzeit ohne Sekunden
+            string formattedDateTime = javaDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+
+            return formattedDateTime;
+        }
+
+
+        //----------------------------DOGRACE----------------------------
+        public async Task<List<Dograce>> GetDograceAsync()
+        {
+            string requestUrl = $"{baseUrl}/dograce";
+
+            response = await client.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        List<Dograce> participants = JsonSerializer.Deserialize<List<Dograce>>(values);
+
+                        foreach (Dograce drace in participants)
+                        {
+                            drace.racestart = convertDateTime(drace.racestart);
+                        }
+
+                        return participants;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error while reloading races!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        public async Task<Dograce> GetDograceByLocation(string loc)
+        {
+            string requestUrl = $"{baseUrl}/dograce/location/{loc}";
+
+            response = await client.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        Dograce? d = JsonSerializer.Deserialize<Dograce>(values);
+                        return d;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Email does not exist!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+
+        //----------------------------SNAILRACE----------------------------
+        public async Task<List<Snailrace>> GetSnailraceAsync()
+        {
+            string requestUrl = $"{baseUrl}/snailrace";
+
+            response = await client.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        List<Snailrace> participants = JsonSerializer.Deserialize<List<Snailrace>>(values);
+
+                        List<Snailrace> tmplist = new List<Snailrace>();
+                        foreach (Snailrace srace in participants)
+                        {
+                            srace.start = convertDateTime(srace.start);
+                            tmplist.Add(srace);
+                        }
+
+                        return tmplist;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error while reloading races!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        public async Task<Snailrace> GetSnailraceByLocation(string loc)
+        {
+            string requestUrl = $"{baseUrl}/snailrace/location/{loc}";
+
+            response = await client.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        Snailrace? s = JsonSerializer.Deserialize<Snailrace>(values);
+                        return s;
                     }
                     else
                     {

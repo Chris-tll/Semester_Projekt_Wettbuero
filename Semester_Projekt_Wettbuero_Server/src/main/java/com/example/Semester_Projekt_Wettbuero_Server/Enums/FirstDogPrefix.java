@@ -1,0 +1,31 @@
+package com.example.Semester_Projekt_Wettbuero_Server.Enums;
+
+public enum FirstDogPrefix {
+    Bolt,
+    Speedy,
+    Zoom,
+    Dash,
+    Turbo,
+    Blaze,
+    Flash,
+    Sonic,
+    Swift,
+    Rocket,
+    Whirlwind,
+    Lightning,
+    Thunder,
+    Sprinter,
+    Cyclone,
+    Ace,
+    Jet,
+    Maverick,
+    Nitro,
+    Racer,
+    Scout,
+    Speedster,
+    Storm,
+    Tracker,
+    Vortex,
+    Whippet,
+    Zoomer
+}

@@ -1,6 +1,5 @@
 package com.example.Semester_Projekt_Wettbuero_Server.Controller;
 
-import Entities.Horse;
 import Entities.Horserace;
 import com.example.Semester_Projekt_Wettbuero_Server.Services.HorseraceService;
 import com.example.Semester_Projekt_Wettbuero_Server.Views;
@@ -34,11 +33,11 @@ public class HorseraceController {
 
     //POST MAPPING
     @PostMapping
-    public Horserace createRace(@Valid @RequestBody Horserace race) { return horseraceService.createRace(race); }
+    public Horserace createRace() { return horseraceService.createRace(); }
 
     //PUT MAPPING
     @PutMapping("/{id}") @JsonView(Views.ExtetendedPublic.class)
-    public ResponseEntity<String> updateRace(@PathVariable String id, @RequestBody Horserace race) { return horseraceService.updateRace(id, race); }
+    public ResponseEntity<String> updateRace(@PathVariable String id, @RequestBody Horserace horserace) { return horseraceService.updateRace(id, horserace); }
 
     //DELETE MAPPING
     @DeleteMapping("/{id}") @JsonView(Views.ExtetendedPublic.class)

@@ -1,5 +1,6 @@
 package com.example.Semester_Projekt_Wettbuero_Server.Services;
 
+import Entities.Bet;
 import com.example.Semester_Projekt_Wettbuero_Server.Enums.Roles;
 import com.example.Semester_Projekt_Wettbuero_Server.Repositories.UserRepository;
 import Entities.User;
@@ -19,6 +20,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // GET
     public List<User> getAllUser() { return userRepository.findAll(); }
 
     public User getUserById(String id) { return userRepository.findById(id).orElse(null); }
@@ -63,6 +65,13 @@ public class UserService {
         return null;
     }
 
+    public List<Bet> getBetsByUsername(String username) {
+        if(userRepository.findByUsername() != null){
+            User u = userRepository.findByUsername();
+            return u.getAllBets();
+        }
+        return null;
+    }
 
     //Create
     public User createUser(User user) {

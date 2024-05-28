@@ -1,5 +1,6 @@
 package com.example.Semester_Projekt_Wettbuero_Server.Controller;
 
+import Entities.Bet;
 import com.example.Semester_Projekt_Wettbuero_Server.Services.UserService;
 import Entities.User;
 import com.example.Semester_Projekt_Wettbuero_Server.Views;
@@ -34,6 +35,8 @@ public class UserController {
     @GetMapping("/password/{email}/{password}")
     public boolean comparePassword(@PathVariable String email, @PathVariable String password) { return userService.checkPassword(email, password); }
 
+    @GetMapping("/Bet/username/{username}")
+    public List<Bet> getBetsByUsername(@PathVariable String username) { return userService.getBetsByUsername(username); }
     //MAPPING POST
     @PostMapping
     public User createUser( @Valid @RequestBody User user) { return userService.createUser(user); }

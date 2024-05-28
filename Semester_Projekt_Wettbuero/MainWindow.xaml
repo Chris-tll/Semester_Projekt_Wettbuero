@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Semester_Projekt_Wettbuero"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1500"
-        WindowState="Maximized"
-        WindowStyle="None">
+        Title="Betting-Office" Height="900" Width="1500"
+        Icon="logo_betting-office.png">
     <Grid>
         <Grid x:Name="login_grid" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush ImageSource="login_register_background.png" />
+            </Grid.Background>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="400"/>
@@ -22,13 +25,27 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="1" Content="LOGIN" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="45"/>
-            <Button x:Name="Btn_Login" Grid.Column="1" Content="Login" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="380" Margin="0,33,0,0" Click="Button_Click" Height="25"/>
-            <TextBox x:Name="TextBox_Name" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="Enter your email or username" VerticalAlignment="Center" Width="333" Margin="48,0,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0"/>
-            <Image Grid.Column="1" HorizontalAlignment="Left" Height="46" Margin="8,25,0,0" VerticalAlignment="Top" Width="45" Grid.Row="1" Source="person-circle-outline.svg"/>
-            <Image HorizontalAlignment="Left" Height="32" Margin="13,0,0,0" VerticalAlignment="Center" Width="42" Source="/user_icon.png" Grid.Column="1" Grid.Row="1"/>
-            <Image HorizontalAlignment="Left" Height="40" Margin="16,98,0,0" VerticalAlignment="Top" Width="29" Source="/lock_icon.png" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="1" Margin="50,59,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+
+            <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="385" Margin="156,15,0,0" Grid.RowSpan="4" Stroke="White" VerticalAlignment="Top" Width="480">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="Black" Opacity="0.5"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label Grid.Column="1" Content="LOGIN" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="45" Foreground="White"/>
+            <Button x:Name="Btn_Login" Grid.Column="1" Content="Login" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="380" Margin="0,33,0,0" Click="Button_Click" Height="25" FontWeight="Bold">
+                <Button.Background>
+                    <SolidColorBrush Color="White" Opacity="1"/>
+                </Button.Background>
+            </Button>
+            <Label x:Name="Label_Email_Login" Grid.Column="1" Content="Enter your email" HorizontalAlignment="Left" Margin="48,28,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" FontStyle="Italic" FontSize="18" Width="324"/>
+            <TextBox x:Name="TextBox_Name" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="333" Margin="48,0,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Foreground="White" TextChanged="OnTextBoxGotInput">
+                <TextBox.Background>
+                    <SolidColorBrush Color="White" Opacity="0"/>
+                </TextBox.Background>
+            </TextBox>
+            <Image Grid.Column="1" HorizontalAlignment="Left" Height="38" Margin="12,27,0,0" VerticalAlignment="Top" Width="36" Grid.Row="1" Source="user_icon.png"/>
+            <Image HorizontalAlignment="Left" Height="40" Margin="15,95,0,0" VerticalAlignment="Top" Width="29" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Source="lock_icon.png"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="1" Margin="50,59,0,0" Grid.Row="1" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -38,9 +55,10 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label x:Name="Label_Password_Placeholder" Grid.Column="1" Content="Enter your password" HorizontalAlignment="Left" Margin="48,93,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Grid.RowSpan="2"/>
-            <PasswordBox x:Name="PasswordBox_Password" Grid.Column="1" HorizontalAlignment="Left" Margin="50,6,0,0" Grid.Row="2" VerticalAlignment="Top" Width="331" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="1" Margin="50,23,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+
+            <Label x:Name="Label_Password_Placeholder" Grid.Column="1" Content="Enter your password" HorizontalAlignment="Left" Margin="48,93,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Grid.RowSpan="2" Foreground="White"/>
+            <PasswordBox x:Name="PasswordBox_Password" Grid.Column="1" HorizontalAlignment="Left" Margin="50,6,0,0" Grid.Row="2" VerticalAlignment="Top" Width="331" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent" Foreground="White"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="1" Margin="50,23,0,0" Grid.Row="2" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -50,13 +68,17 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label Grid.Column="1" Content="No member yet? Click" HorizontalAlignment="Left" Margin="64,70,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150"/>
-            <Button x:Name="Btn_register" Grid.Column="1" Content="here" HorizontalAlignment="Center" Margin="0,74,0,0" Grid.Row="2" VerticalAlignment="Top" Width="28" Background="Transparent" BorderThickness="0" FontStyle="Italic" FontWeight="Bold" Click="Btn_register_Click"/>
+            <Label Grid.Column="1" Content="No member yet? Click" HorizontalAlignment="Left" Margin="64,70,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150" Foreground="White"/>
+            <Button x:Name="Btn_register" Grid.Column="1" Content="here" HorizontalAlignment="Center" Margin="0,74,0,0" Grid.Row="2" VerticalAlignment="Top" Width="28" Background="Transparent" BorderThickness="0" FontStyle="Italic" FontWeight="Bold" Click="Btn_register_Click" Foreground="White"/>
         </Grid>
 
 
 
         <Grid x:Name="register_grid" Visibility="Hidden" >
+            <Grid.Background>
+                <ImageBrush ImageSource="login_register_background.png" />
+            </Grid.Background>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="400"/>
@@ -69,14 +91,23 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="1" Content="REGISTER" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="45"/>
-            <Button x:Name="Btn_Register" Content="Register" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="399" Margin="0,90,0,0" Click="On_Btn_Register" Height="25" Grid.Column="1"/>
-            <Label x:Name="Label_Firstname" Grid.Column="1" Content="Enter your firstname" HorizontalAlignment="Left" Margin="46,97,0,0" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="176" Grid.RowSpan="2"/>
-            <TextBox x:Name="TextBox_Firstname" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Margin="48,2,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_FirstDigit_ToUpper" LostFocus="TextBox_LostFocus_FirstDigit_ToUpper" TextChanged="OnTextBoxGotInput"/>
-            <Image Grid.Column="1" HorizontalAlignment="Left" Height="46" Margin="8,93,0,0" VerticalAlignment="Top" Width="45" Source="person-circle-outline.svg" Grid.RowSpan="2"/>
-            <Image HorizontalAlignment="Left" Height="32" Margin="11,2,0,0" VerticalAlignment="Top" Width="42" Source="/user_icon.png" Grid.Column="1" Grid.Row="1"/>
+
+            <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="559" Margin="156,15,0,0" Grid.RowSpan="5" Stroke="White" VerticalAlignment="Top" Width="480">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="Black" Opacity="0.5"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label Grid.Column="1" Content="REGISTER" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold" FontSize="45" Foreground="White"/>
+            <Button x:Name="Btn_Register" Content="Register" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="399" Margin="0,90,0,0" Click="On_Btn_Register" Height="25" Grid.Column="1" Foreground="White" BorderBrush="White">
+                <Button.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.5"/>
+                </Button.Background>
+            </Button>
+            <Label x:Name="Label_Firstname" Grid.Column="1" Content="Enter your firstname" HorizontalAlignment="Left" Margin="46,97,0,0" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="176" Grid.RowSpan="2" Foreground="White"/>
+            <TextBox x:Name="TextBox_Firstname" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Margin="48,2,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_FirstDigit_ToUpper" LostFocus="TextBox_LostFocus_FirstDigit_ToUpper" TextChanged="OnTextBoxGotInput" Foreground="White"/>
+            <Image Grid.Column="1" HorizontalAlignment="Left" Height="38" Margin="8,96,0,0" VerticalAlignment="Top" Width="33" Source="user_icon.png" Grid.RowSpan="2"/>
             <Image HorizontalAlignment="Left" Height="31" Margin="18,98,0,0" VerticalAlignment="Top" Width="29" Source="/lock_icon.png" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,28,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,28,0,0" Grid.Row="1" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -86,13 +117,13 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label x:Name="Label_SetPass" Grid.Column="1" Content="Enter your password" HorizontalAlignment="Left" Margin="48,94,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Grid.RowSpan="2"/>
-            <PasswordBox x:Name="PasswordBox_Password_Set" Grid.Column="1" HorizontalAlignment="Left" Margin="50,4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="332" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent"/>
-            <Label Grid.Column="1" Content="Already have an account? Click here to " HorizontalAlignment="Left" Margin="66,120,0,0" Grid.Row="4" VerticalAlignment="Top" Width="244"/>
-            <Button x:Name="deeeee" Grid.Column="1" Content="login" HorizontalAlignment="Left" Margin="278,124,0,0" Grid.Row="4" VerticalAlignment="Top" Width="31" Background="Transparent" BorderThickness="0" FontStyle="Italic" FontWeight="Bold" Click="Btn_register_Click"/>
-            <Label x:Name="Label_Lastname" Grid.Column="1" Content="Enter your lastname" HorizontalAlignment="Left" Margin="46,35,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="190"/>
-            <TextBox x:Name="TextBox_Lastname" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,40,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_FirstDigit_ToUpper" LostFocus="TextBox_LostFocus_FirstDigit_ToUpper" TextChanged="OnTextBoxGotInput"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,66,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+            <Label x:Name="Label_SetPass" Grid.Column="1" Content="Enter your password" HorizontalAlignment="Left" Margin="48,94,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Grid.RowSpan="2" Foreground="White"/>
+            <PasswordBox x:Name="PasswordBox_Password_Set" Grid.Column="1" HorizontalAlignment="Left" Margin="50,4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="332" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent" Foreground="White"/>
+            <Label Grid.Column="1" Content="Already have an account? Click here to " HorizontalAlignment="Left" Margin="66,120,0,0" Grid.Row="4" VerticalAlignment="Top" Width="244" Foreground="White"/>
+            <Button x:Name="deeeee" Grid.Column="1" Content="login" HorizontalAlignment="Left" Margin="278,124,0,0" Grid.Row="4" VerticalAlignment="Top" Width="31" Background="Transparent" BorderThickness="0" FontStyle="Italic" FontWeight="Bold" Click="Btn_register_Click" Foreground="White"/>
+            <Label x:Name="Label_Lastname" Grid.Column="1" Content="Enter your lastname" HorizontalAlignment="Left" Margin="46,35,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="190" Foreground="White"/>
+            <TextBox x:Name="TextBox_Lastname" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,40,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_FirstDigit_ToUpper" LostFocus="TextBox_LostFocus_FirstDigit_ToUpper" TextChanged="OnTextBoxGotInput" Foreground="White"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,66,0,0" Grid.Row="1" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -102,9 +133,9 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label x:Name="Label_Username" Grid.Column="1" Content="Enter your username" HorizontalAlignment="Left" Margin="46,73,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="190" Grid.RowSpan="2"/>
-            <TextBox x:Name="TextBox_Username" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,78,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" Grid.RowSpan="2" TextChanged="OnTextBoxGotInput"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,5,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+            <Label x:Name="Label_Username" Grid.Column="1" Content="Enter your username" HorizontalAlignment="Left" Margin="46,73,0,0" Grid.Row="1" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="190" Grid.RowSpan="2" Foreground="White"/>
+            <TextBox x:Name="TextBox_Username" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,78,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" Grid.RowSpan="2" TextChanged="OnTextBoxGotInput" Foreground="White"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,5,0,0" Grid.Row="2" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -114,9 +145,9 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label x:Name="Label_Age" Grid.Column="1" Content="Enter your age" HorizontalAlignment="Left" Margin="46,12,0,0" Grid.Row="2" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="138"/>
-            <TextBox x:Name="TextBox_Age" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,17,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_Digits" TextChanged="OnTextBoxGotInput"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,43,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+            <Label x:Name="Label_Age" Grid.Column="1" Content="Enter your age" HorizontalAlignment="Left" Margin="46,12,0,0" Grid.Row="2" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="138" Foreground="White"/>
+            <TextBox x:Name="TextBox_Age" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,17,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_Digits" TextChanged="OnTextBoxGotInput" Foreground="White"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,43,0,0" Grid.Row="2" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -126,10 +157,10 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <ComboBox x:Name="ComboBox_gender" Grid.Column="1" HorizontalAlignment="Left" Margin="50,58,0,0" Grid.Row="2" VerticalAlignment="Top" Width="331" Background="Transparent" BorderThickness="0" FontSize="18" Text="Choose your gender"/>
-            <Label x:Name="Label_Phone" Grid.Column="1" Content="Enter your phone number" HorizontalAlignment="Left" Margin="46,4,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="246"/>
-            <TextBox x:Name="TextBox_Phone" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,9,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_Digits" TextChanged="OnTextBoxGotInput"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,35,0,0" Grid.Row="3" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+            <ComboBox x:Name="ComboBox_gender" Grid.Column="1" HorizontalAlignment="Left" Margin="50,58,0,0" Grid.Row="2" VerticalAlignment="Top" Width="331" Background="Transparent" BorderThickness="0" FontSize="18" Text="Choose your gender" Foreground="Black"/>
+            <Label x:Name="Label_Phone" Grid.Column="1" Content="Enter your phone number" HorizontalAlignment="Left" Margin="46,4,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="36" Width="246" Foreground="White"/>
+            <TextBox x:Name="TextBox_Phone" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,9,0,0" Height="32" FontSize="18" FontStyle="Italic" BorderThickness="0" Background="Transparent" PreviewTextInput="TextBox_PreviewTextInput_Digits" TextChanged="OnTextBoxGotInput" Foreground="White"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,35,0,0" Grid.Row="3" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -141,9 +172,9 @@
             </Rectangle>
             <Image HorizontalAlignment="Left" Height="26" Margin="15,10,0,0" VerticalAlignment="Top" Width="34" Source="/phone_icon.png" Grid.Column="1" Grid.Row="3"/>
             <Image x:Name="email" HorizontalAlignment="Left" Height="32" Margin="13,48,0,0" VerticalAlignment="Top" Width="40" Source="/email_icon.png" Grid.Column="1" Grid.Row="3"/>
-            <Label x:Name="Label_Email" Grid.Column="1" Content="Enter your email" HorizontalAlignment="Left" Margin="46,43,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="35" Width="138"/>
-            <TextBox x:Name="TextBox_Email" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,48,0,0" Height="32" FontSize="18" FontStyle="Italic" Background="Transparent" BorderThickness="0" TextChanged="OnTextBoxGotInput"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,74,0,0" Grid.Row="3" Stroke="Black" VerticalAlignment="Top" Width="332" RenderTransformOrigin="0.5,0.5">
+            <Label x:Name="Label_Email" Grid.Column="1" Content="Enter your email" HorizontalAlignment="Left" Margin="46,43,0,0" Grid.Row="3" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Height="35" Width="138" Foreground="White"/>
+            <TextBox x:Name="TextBox_Email" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Margin="48,48,0,0" Height="32" FontSize="18" FontStyle="Italic" Background="Transparent" BorderThickness="0" TextChanged="OnTextBoxGotInput" Foreground="White"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="48,74,0,0" Grid.Row="3" Stroke="White" VerticalAlignment="Top" Width="332" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -153,7 +184,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="49,25,0,0" Grid.Row="4" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="49,25,0,0" Grid.Row="4" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -163,9 +194,9 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Label x:Name="Label_ConfirmPass" Grid.Column="1" Content="Confirm your password" HorizontalAlignment="Left" Margin="48,37,0,0" Grid.Row="4" VerticalAlignment="Top" FontStyle="Italic" FontSize="18"/>
-            <PasswordBox x:Name="PasswordBox_Password_Confirm" Grid.Column="1" HorizontalAlignment="Left" Margin="50,44,0,0" Grid.Row="4" VerticalAlignment="Top" Width="332" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="49,67,0,0" Grid.Row="4" Stroke="Black" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
+            <Label x:Name="Label_ConfirmPass" Grid.Column="1" Content="Confirm your password" HorizontalAlignment="Left" Margin="48,37,0,0" Grid.Row="4" VerticalAlignment="Top" FontStyle="Italic" FontSize="18" Foreground="White"/>
+            <PasswordBox x:Name="PasswordBox_Password_Confirm" Grid.Column="1" HorizontalAlignment="Left" Margin="50,44,0,0" Grid.Row="4" VerticalAlignment="Top" Width="332" Height="24" BorderThickness="0" PasswordChanged="OnPasswordChanged" Background="Transparent" Foreground="White"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="2" Margin="49,67,0,0" Grid.Row="4" Stroke="White" VerticalAlignment="Top" Width="331" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -180,7 +211,10 @@
 
 
 
-        <Grid x:Name="game_grid" Visibility="Hidden">
+        <Grid x:Name="game_grid" Visibility="Visible">
+            <Grid.Background>
+                <ImageBrush ImageSource="racetrack.jpg" />
+            </Grid.Background>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -199,38 +233,177 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Rectangle Height="100" Fill="#FFFA0505" Grid.ColumnSpan="6" Grid.Row="0">
-                    <!-- Fügen Sie den Schatteneffekt zum Rechteck hinzu -->
+                <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="1500" Source="/dark-wood-plank.jpeg" Stretch="Fill" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
+                <Image HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="71" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="0,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image HorizontalAlignment="Left" Height="805" VerticalAlignment="Top" Width="77" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="73,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5" Grid.Column="5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <Label x:Name="Label_StartPage_BettingOffice" Grid.Column="2" Content="Race-Royale-Bets" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="476" FontFamily="Stencil" Foreground="White" Grid.RowSpan="2" Margin="0,11,0,0"/>
+                <TextBlock x:Name="TextBlock_StartPage_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Top" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,34,0,0" Foreground="White"/>
+                <TextBlock x:Name="TextBlock_StartPage_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" FontFamily="Stencil" FontSize="20" Width="192" Margin="15,34,0,0" Foreground="White"/>
+                <Label x:Name="Label_Office" Content="Office" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Width="434" FontFamily="Stencil" Margin="81,57,0,0" Grid.Row="1" Foreground="White" Grid.ColumnSpan="3"/>
+
+
+                <Rectangle Grid.Column="4" HorizontalAlignment="Left" Height="679" Margin="80,119,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="294" Grid.ColumnSpan="2" Grid.RowSpan="5" RadiusX="55.5" RadiusY="55.5">
+                    <!-- Apply a non-transparent Fill -->
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                        <!-- Example: White with 50% opacity -->
+                    </Rectangle.Fill>
+                    <!-- Apply the BlurEffect -->
                     <Rectangle.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Black" Opacity="0.5"/>
+                        <BlurEffect Radius="10"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                <Label x:Name="Label_StartPage_BettingOffice" Grid.Column="2" Content="Betting office" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="434" FontFamily="Stencil" Margin="0,-3,0,0"/>
-                <TextBlock x:Name="TextBlock_StartPage_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Center" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,0,0,0"/>
-                <TextBlock x:Name="TextBlock_StartPage_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Center" FontFamily="Stencil" FontSize="20" Width="192" Margin="3,0,0,0"/>
-                <Rectangle Grid.Column="4" HorizontalAlignment="Left" Height="720" Margin="150,45,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2" Grid.RowSpan="5">
+                <Rectangle Grid.Column="3" HorizontalAlignment="Left" Height="260" Margin="45,0,0,0" Grid.Row="3" Stroke="Black" VerticalAlignment="Center" Width="263" Grid.ColumnSpan="2" RadiusX="33.5" RadiusY="33.5">
+                    <!-- Apply a non-transparent Fill -->
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                        <!-- Example: White with 50% opacity -->
+                    </Rectangle.Fill>
+                    <!-- Apply the BlurEffect -->
                     <Rectangle.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="50" Color="Black" Opacity="0.5"/>
+                        <BlurEffect Radius="10"/>
                     </Rectangle.Effect>
                 </Rectangle>
-                <Label x:Name="Label_ActiveBets" Grid.Column="4" Content="Active Bets" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="20" Width="130" FontFamily="Stencil" Margin="228,63,0,0" Grid.ColumnSpan="2"/>
-                <ListView x:Name="ListView_ActiveBets" Grid.Column="4" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="182,0,30,88" Grid.RowSpan="4">
+                <Rectangle Grid.Column="2" HorizontalAlignment="Center" Height="260" Grid.Row="3" Stroke="Black" VerticalAlignment="Center" Width="264" RadiusX="39.5" RadiusY="39.5">
+                    <!-- Apply a non-transparent Fill -->
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                        <!-- Example: White with 50% opacity -->
+                    </Rectangle.Fill>
+                    <!-- Apply the BlurEffect -->
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="10"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Rectangle HorizontalAlignment="Left" Height="260" Grid.Row="3" Stroke="Black" VerticalAlignment="Center" Width="264" Grid.ColumnSpan="2" Margin="142,0,0,0" RadiusX="36.5" RadiusY="36.5">
+                    <!-- Apply a non-transparent Fill -->
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                        <!-- Example: White with 50% opacity -->
+                    </Rectangle.Fill>
+                    <!-- Apply the BlurEffect -->
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="10"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+
+                <Label x:Name="Label_ActiveBets" Grid.Column="4" Content="Active Bets" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="20" Width="130" FontFamily="Stencil" Margin="161,119,0,0" Foreground="White" Grid.RowSpan="2"/>
+                <ListView x:Name="ListView_ActiveBets" Grid.Column="4" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="107,32,103,56" Grid.RowSpan="4">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="Button_DogRace" Grid.Column="3" Content="Dog Race" HorizontalAlignment="Left" Margin="79,30,0,0" Grid.Row="3" VerticalAlignment="Top" Height="300" Width="300" Grid.ColumnSpan="2" FontSize="25" FontFamily="Stencil"/>
-                <Button x:Name="Button_HorseRace" Grid.Column="1" Content="Horse race" HorizontalAlignment="Left" Margin="294,30,0,0" Grid.Row="3" VerticalAlignment="Top" Height="300" Width="300" Grid.ColumnSpan="2" FontFamily="Stencil" FontSize="25" Click="Button_HorseRace_Click"/>
-                <Button x:Name="Button_SnailRace" Content="Snail race" HorizontalAlignment="Left" Margin="58,30,0,0" Grid.Row="3" VerticalAlignment="Top" Height="300" Width="300" Grid.ColumnSpan="2" FontSize="25" FontFamily="Stencil"/>
-                <Label Content="Choose on which race you want to set your bet" HorizontalAlignment="Left" Margin="58,55,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="25" FontFamily="Stencil" Grid.ColumnSpan="3" Width="652"/>
-                <TextBlock HorizontalAlignment="Left" Margin="60,60,0,0" Grid.Row="5" TextWrapping="Wrap" Text="www.BettingOffice.com" VerticalAlignment="Top" FontSize="15" FontFamily="Stencil" Grid.ColumnSpan="3" Width="574"/>
-                <Label Content="Have you already checked out your statistics and more news on our website?" HorizontalAlignment="Left" Margin="55,14,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Stencil" FontSize="20" Grid.ColumnSpan="4" Width="851"/>
+                <Button x:Name="Button_DogRace" BorderThickness="0" Grid.Column="3" Content="" HorizontalAlignment="Left" Margin="51,0,0,0" Grid.Row="3" VerticalAlignment="Center" Height="250" Width="250" Grid.ColumnSpan="2" FontSize="25" FontFamily="Stencil" Click="Button_DogRace_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover-Effekt -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.0"/>
+                                    <!-- Ändern des RenderTransformOrigin auf das obere Zentrum -->
+                                    <Setter TargetName="border" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                                            <!-- Größere Skalierung für den Hover-Effekt -->
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                    <Button.Background>
+                        <ImageBrush ImageSource="/dograce_button.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Button_HorseRace" BorderThickness="0" Grid.Column="2" Content="" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Height="250" Width="250" FontFamily="Stencil" FontSize="25" Click="Button_HorseRace_Click" Grid.ColumnSpan="2" Margin="24,0,0,0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover-Effekt -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.0"/>
+                                    <!-- Ändern des RenderTransformOrigin auf das obere Zentrum -->
+                                    <Setter TargetName="border" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                                            <!-- Größere Skalierung für den Hover-Effekt -->
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Horserace_button.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Button_SnailRace" BorderThickness="0" Content="" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Height="250" Width="250" Grid.ColumnSpan="2" FontSize="25" FontFamily="Stencil" Click="Button_SnailRace_Click" Margin="148,0,0,0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover-Effekt -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.0"/>
+                                    <!-- Ändern des RenderTransformOrigin auf das obere Zentrum -->
+                                    <Setter TargetName="border" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                                            <!-- Größere Skalierung für den Hover-Effekt -->
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Snailrace_button.png"/>
+                    </Button.Background>
+                </Button>
+                <Label Content="Choose on which race you want to set your bet" HorizontalAlignment="Left" Margin="84,21,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="25" FontFamily="Stencil" Grid.ColumnSpan="3" Width="662" Foreground="White"/>
+                <TextBlock HorizontalAlignment="Left" Margin="92,60,0,0" Grid.Row="5" TextWrapping="Wrap" Text="www.BettingOffice.com" VerticalAlignment="Top" FontSize="15" FontFamily="Stencil" Grid.ColumnSpan="3" Width="574" Foreground="White"/>
+                <Label Content="Have you already checked out your statistics and more news on our website?" HorizontalAlignment="Left" Margin="87,14,0,0" Grid.Row="5" VerticalAlignment="Top" FontFamily="Stencil" FontSize="20" Grid.ColumnSpan="4" Width="851" Foreground="White"/>
             </Grid>
         </Grid>
 
-        <Grid x:Name="HorseRace_grid" Visibility="Visible">
+
+        <Grid x:Name="HorseRace_grid" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush ImageSource="horserace.jpg" />
+            </Grid.Background>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -249,46 +422,378 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Rectangle Height="100" Fill="#FFFA0505" Grid.ColumnSpan="6" Grid.Row="0">
-                    <!-- Fügen Sie den Schatteneffekt zum Rechteck hinzu -->
-                    <Rectangle.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Black" Opacity="0.5"/>
-                    </Rectangle.Effect>
-                </Rectangle>
-                <Label x:Name="Label_Horserace_BettingOffice" Grid.Column="2" Content="Betting office" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="434" FontFamily="Stencil" Margin="0,-3,0,0"/>
-                <TextBlock x:Name="TextBlock_Horserace_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Center" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,0,0,0"/>
-                <TextBlock x:Name="TextBlock_Horserace_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Center" FontFamily="Stencil" FontSize="20" Width="192" Margin="3,0,0,0"/>
-                <Label x:Name="Label_Horserace" Content="Horserace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="434" FontFamily="Stencil" Margin="16,57,0,0" Grid.Row="1"/>
-                <ListView x:Name="ListView_Horserace_Upcoming" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="16,0,0,30" Grid.RowSpan="3" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Horserace_Upcoming_SelectionChanged">
+                <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="1500" Source="/dark-wood-plank.jpeg" Stretch="Fill" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
+                <Image HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="71" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="0,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image HorizontalAlignment="Left" Height="805" VerticalAlignment="Top" Width="77" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="73,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5" Grid.Column="5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <Label x:Name="Label_Horserace_BettingOffice" Grid.Column="2" Content="Race-Royale-Bets" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="479" FontFamily="Stencil" Margin="0,10,0,0" Grid.RowSpan="2" Foreground="White"/>
+                <TextBlock x:Name="TextBlock_Horserace_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Top" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,34,0,0" Foreground="White"/>
+                <TextBlock x:Name="TextBlock_Horserace_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" FontFamily="Stencil" FontSize="20" Width="192" Margin="15,34,0,0" Foreground="White"/>
+
+                <Label x:Name="Label_Horserace" Content="Horserace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Width="434" FontFamily="Stencil" Margin="155,57,0,0" Grid.Row="1" Foreground="White" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1"/>
+                <TextBlock x:Name="TextBlock_Horserace_Office" FontSize="50" FontWeight="Bold" FontFamily="Stencil" HorizontalAlignment="Left" Foreground="White" Margin="81,61,0,0" TextWrapping="Wrap" Text="Office --" VerticalAlignment="Top" Grid.Row="1" Width="386" Grid.RowSpan="2" Grid.ColumnSpan="3" MouseLeftButtonUp="BackToOffice"/>
+
+
+                <ListView x:Name="ListView_Horserace_Upcoming" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="88,0,235,30" Grid.RowSpan="3" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Horserace_Upcoming_SelectionChanged" Foreground="White" BorderBrush="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <ListView x:Name="ListView_Horserace_Finished" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="79,0,87,30" Grid.RowSpan="3" Grid.Column="2" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_SelectionChanged">
+                <ListView x:Name="ListView_Horserace_Finished" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="78,0,92,30" Grid.RowSpan="3" Grid.Column="2" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Horserace_Finished_SelectionChanged" Foreground="White" BorderBrush="White" Width="430">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Label Content="Upcoming races" HorizontalAlignment="Left" Margin="115,76,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="236" FontSize="25"/>
-                <Label Content="Finished races" HorizontalAlignment="Left" Margin="178,78,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="236" FontSize="25" Grid.Column="2"/>
-                <Label Content="Race Informations" HorizontalAlignment="Left" Margin="96,76,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="245" FontSize="25" Grid.Column="4"/>
-                <ListView x:Name="ListView_Horserace_Info" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="0,0,16,30" Grid.RowSpan="4" Grid.Column="4" FontSize="15" FontFamily="Stencil">
+                <Label Content="Upcoming races" HorizontalAlignment="Left" Margin="32,76,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Width="218" FontSize="25" Grid.Column="1" Foreground="White" OpacityMask="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <Label Content="Finished races" HorizontalAlignment="Left" Margin="176,78,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="208" FontSize="25" Grid.Column="2" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <Label Content="Race Informations" HorizontalAlignment="Left" Margin="20,78,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Stencil" Width="244" FontSize="25" Grid.Column="4" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <ListView x:Name="ListView_Horserace_Info" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="222,0,94,30" Grid.RowSpan="4" Grid.Column="3" FontSize="15" FontFamily="Stencil" Foreground="White" BorderBrush="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button x:Name="Btn_Horserace_Upcoming_Reload" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="186,72,0,0" Grid.Row="1" VerticalAlignment="Top" Height="37" Width="37" BorderBrush="Transparent" Click="Btn_Horserace_Upcoming_Reload_Click">
+
+                <Button x:Name="Btn_Horserace_Reload_Races" Grid.Column="2" Content="" HorizontalAlignment="Left" Margin="172,72,0,0" Grid.Row="1" VerticalAlignment="Top" Height="37" Width="36" BorderBrush="Transparent" Click="Btn_Horserace_Reload_Races_Click" OpacityMask="White">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover-Effekt -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.0"/>
+                                    <!-- Ändern des RenderTransformOrigin auf das obere Zentrum -->
+                                    <Setter TargetName="border" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                                            <!-- Größere Skalierung für den Hover-Effekt -->
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
                     <Button.Background>
                         <ImageBrush ImageSource="/reload_icon.png"/>
                     </Button.Background>
                 </Button>
+                <Button x:Name="Btn_Horserace_Bet" Grid.Column="4" Content="Set bet" HorizontalAlignment="Left" Margin="77,39,0,0" Grid.Row="5" VerticalAlignment="Top" FontSize="25" FontFamily="Stencil" Width="122" Click="Btn_Horserace_Bet_Click"/>
+            </Grid>
+        </Grid>
 
+
+        <Grid x:Name="Dograce_grid" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush ImageSource="dograce.jpg" />
+            </Grid.Background>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="1500" Source="/dark-wood-plank.jpeg" Stretch="Fill" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
+                <Image HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="71" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="0,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image HorizontalAlignment="Left" Height="805" VerticalAlignment="Top" Width="77" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="73,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5" Grid.Column="5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <Label x:Name="Label_Dograce_BettingOffice" Grid.Column="2" Content="Race-Royale-Bets" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="485" FontFamily="Stencil" Margin="0,10,0,0" Grid.RowSpan="2" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="White" Opacity="0"/>
+                    </Label.Background>
+                </Label>
+                <TextBlock x:Name="TextBlock_Dograce_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Top" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,34,0,0" Foreground="White"/>
+                <TextBlock x:Name="TextBlock_Dograce_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" FontFamily="Stencil" FontSize="20" Width="192" Margin="15,34,0,0" Foreground="White"/>
+                <Label x:Name="Label_Dograce" Content="Dograce" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Width="434" FontFamily="Stencil" Margin="145,57,0,0" Grid.Row="1" Foreground="White" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1">
+                    <Label.Background>
+                        <ImageBrush/>
+                    </Label.Background>
+                </Label>
+                <TextBlock x:Name="TextBlock_Dograce_Office" FontSize="50" FontWeight="Bold" FontFamily="Stencil" HorizontalAlignment="Left" Foreground="White" Margin="81,61,0,0" TextWrapping="Wrap" Text="Office --" VerticalAlignment="Top" Grid.Row="1" Width="220" Grid.RowSpan="2" Grid.ColumnSpan="2" MouseLeftButtonUp="BackToOffice"/>
+
+
+                <ListView x:Name="ListView_Dograce_Upcoming" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="84,0,232,30" Grid.RowSpan="3" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Dograce_Upcoming_SelectionChanged" Foreground="White" BorderBrush="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="ListView_Dograce_Finished" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="89,0,77,30" Grid.RowSpan="3" Grid.Column="2" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Dograce_Finished_SelectionChanged" BorderBrush="White" Foreground="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label Content="Upcoming races" HorizontalAlignment="Left" Margin="33,76,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Width="217" FontSize="25" Grid.Column="1" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <Label Content="Finished races" HorizontalAlignment="Left" Margin="188,78,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="208" FontSize="25" Grid.Column="2" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <Label Content="Race Informations" HorizontalAlignment="Left" Margin="42,76,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Stencil" Width="245" FontSize="25" Grid.Column="4" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <ListView x:Name="ListView_Dograce_Info" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="246,0,92,30" Grid.RowSpan="4" Grid.Column="3" FontSize="15" FontFamily="Stencil" BorderBrush="White" Foreground="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <Button x:Name="Btn_Dograce_Reload_Races" Grid.Column="2" Content="" HorizontalAlignment="Left" Margin="104,72,0,0" Grid.Row="1" VerticalAlignment="Top" Height="37" Width="36" BorderBrush="Transparent" Click="Btn_Dograce_Reload_Races_Click" Foreground="White">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover-Effekt -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.0"/>
+                                    <!-- Ändern des RenderTransformOrigin auf das obere Zentrum -->
+                                    <Setter TargetName="border" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                                            <!-- Größere Skalierung für den Hover-Effekt -->
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                    <Button.Background>
+                        <ImageBrush ImageSource="/reload_icon.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Btn_Dograce_Bet" Grid.Column="4" Content="Set bet" HorizontalAlignment="Left" Margin="87,39,0,0" Grid.Row="5" VerticalAlignment="Top" FontSize="25" FontFamily="Stencil" Width="122" Click="Btn_Dograce_Bet_Click"/>
+            </Grid>
+        </Grid>
+
+
+        <Grid x:Name="Snailrace_grid" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush ImageSource="snailrace.jpg" />
+            </Grid.Background>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="1500" Source="/dark-wood-plank.jpeg" Stretch="Fill" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
+                <Image HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="71" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="0,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image HorizontalAlignment="Left" Height="805" VerticalAlignment="Top" Width="77" Source="/dark-wood-plank.jpeg" Stretch="Fill" Margin="73,40,0,0" Grid.Row="1" Grid.RowSpan="5" RenderTransformOrigin="0.5,0.5" Grid.Column="5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <Label x:Name="Label_Snailrace_BettingOffice" Grid.Column="2" Content="Race-Royale-Bets" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Grid.ColumnSpan="2" Width="483" FontFamily="Stencil" Grid.RowSpan="2" Margin="0,15,0,0" Foreground="White"/>
+                <TextBlock x:Name="TextBlock_Snailrace_Username" Grid.ColumnSpan="2" TextTrimming="CharacterEllipsis" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="HAAAAAAAAAAAAAAAAAAAAAAAAAAAA" VerticalAlignment="Top" Height="24" Width="192" FontWeight="Bold" FontSize="20" FontFamily="Stencil" Margin="228,36,0,0" Foreground="White"/>
+                <TextBlock x:Name="TextBlock_Snailrace_Money" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" FontFamily="Stencil" FontSize="20" Width="192" Margin="15,36,0,0" Foreground="White"/>
+                <Label x:Name="Label_Snailrace" Content="Snailrace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" FontWeight="Bold" Width="434" FontFamily="Stencil" Margin="145,57,0,0" Grid.Row="1" Foreground="White" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1">
+                    <Label.Background>
+                        <ImageBrush/>
+                    </Label.Background>
+                </Label>
+                <TextBlock x:Name="TextBlock_Snailrace_Office" FontSize="50" FontWeight="Bold" FontFamily="Stencil" HorizontalAlignment="Left" Foreground="White" Margin="81,61,0,0" TextWrapping="Wrap" Text="Office --" VerticalAlignment="Top" Grid.Row="1" Width="219" Grid.RowSpan="2" Grid.ColumnSpan="2" MouseLeftButtonUp="BackToOffice"/>
+
+                <ListView x:Name="ListView_Snailrace_Upcoming" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="82,0,234,30" Grid.RowSpan="3" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Snailrace_Upcoming_SelectionChanged" Foreground="White" BorderBrush="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="ListView_Snailrace_Finished" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="79,0,83,30" Grid.RowSpan="3" Grid.Column="2" FontSize="15" FontFamily="Stencil" SelectionChanged="ListView_Snailrace_Finished_SelectionChanged" BorderBrush="White" Foreground="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label Content="Upcoming races" HorizontalAlignment="Center" Margin="0,76,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Width="216" FontSize="25" Grid.Column="1" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <Label Content="Finished races" HorizontalAlignment="Left" Margin="178,78,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="Stencil" Grid.ColumnSpan="2" Width="209" FontSize="25" Grid.Column="2" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <Label Content="Race Informations" HorizontalAlignment="Center" Margin="0,76,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Stencil" Width="246" FontSize="25" Grid.Column="4" Foreground="White">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Label.Background>
+                </Label>
+                <ListView x:Name="ListView_Snailrace_Info" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="228,0,88,30" Grid.RowSpan="4" Grid.Column="3" FontSize="15" FontFamily="Stencil" BorderBrush="White" Foreground="White">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </ListView.Background>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <Button x:Name="Btn_Snailrace_Reload_Races" Grid.Column="2" Content="" HorizontalAlignment="Left" Margin="136,72,0,0" Grid.Row="1" VerticalAlignment="Top" Height="37" Width="36" BorderBrush="Transparent" Foreground="White" Click="Btn_Snailrace_Reload_Races_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover-Effekt -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.0"/>
+                                    <!-- Ändern des RenderTransformOrigin auf das obere Zentrum -->
+                                    <Setter TargetName="border" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                                            <!-- Größere Skalierung für den Hover-Effekt -->
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                    <Button.Background>
+                        <ImageBrush ImageSource="/reload_icon.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Btn_Snailrace_Bet" Grid.Column="4" Content="Set bet" HorizontalAlignment="Left" Margin="87,39,0,0" Grid.Row="5" VerticalAlignment="Top" FontSize="25" FontFamily="Stencil" Width="122" Click="Btn_Snailrace_Bet_Click"/>
             </Grid>
         </Grid>
     </Grid>

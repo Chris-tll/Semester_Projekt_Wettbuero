@@ -3,13 +3,11 @@ package Entities;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter @Setter
 public class Horse {
-    @Id @NonNull
-    private String id;
+    @NonNull
+    private int startNum;
 
     private String name;
 
@@ -34,4 +32,6 @@ public class Horse {
     private int terrain_influence;
 
     private int chance_of_winning;
+
+    private double multiplier;
 }

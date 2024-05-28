@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -9,6 +10,8 @@ namespace Semester_Projekt_Wettbuero
 {
     class Horserace
     {
+        public string id { get; set; }
+
         [JsonPropertyName("name")]
         public string racename {  get; set; }
 
@@ -37,6 +40,8 @@ namespace Semester_Projekt_Wettbuero
         public int estimatedDuration { get; set; }
 
         public string status { get; set; }
+
+        public string type { get; set; }
 
         public string ToString()
         {

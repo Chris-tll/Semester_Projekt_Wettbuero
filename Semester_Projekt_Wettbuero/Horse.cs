@@ -8,28 +8,47 @@ namespace Semester_Projekt_Wettbuero
 {
     class Horse
     {
-        private string name;
+        public int startNum {  get; set; }
 
-        private int age;
+        public string name { get; set; }
 
-        private int wins;
+        public int age { get; set; }
 
-        private int took_place_in_races;
+        public int wins { get; set; }
 
-        private int got_ranked;
+        public int took_place_in_races { get; set; }
 
-        private int fitness_level;
+        public int got_ranked { get; set; }
 
-        private int experience_level;
+        public int fitness_level { get; set; }
 
-        private int trainer_quality;
+        public int experience_level { get; set; }
 
-        private int jockey_quality;
+        public int trainer_quality { get; set; }
 
-        private int weather_influence;
+        public int jockey_quality { get; set; }
 
-        private int terrain_influence;
+        public int weather_influence { get; set; }
 
-        private int chance_of_winning;
+        private int terrain_influence { get; set; }
+
+        public int chance_of_winning { get; set; }
+
+        public double multiplier { get; set; }
+
+        public Horse winner;
+
+        public string getParticipantInfo()
+        {
+            string s = "Name: " + this.name + "\n" + "Age: " + this.age + " years old\n" +
+                "Wins: " + this.wins + "\n" + "Participated in races: " + this.took_place_in_races + " times\n" +
+                "Got ranked: " + got_ranked + " times \n" + "Fitness level: " + this.fitness_level + "\n" +
+                "Experience level: " + this.experience_level + "\n" + "Trainer quality: " + this.trainer_quality + "% \n" +
+                "Jockey quality: " + this.jockey_quality + "% \n" + "Weather influence" + this.weather_influence + "\n" +
+                "Terrain influence: " + this.terrain_influence + "\n" + "Chance of Winning: " + this.chance_of_winning + "\n" +
+                "Multiplier: " + this.multiplier + "\n\n";
+
+            return s;
+        }
     }
 }

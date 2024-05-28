@@ -11,6 +11,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "User-Data")
 @Getter @Setter
 public class User {
@@ -42,4 +44,6 @@ public class User {
     private double money_loss;
 
     private double money_win;
+
+    private List<Bet> allBets;
 }

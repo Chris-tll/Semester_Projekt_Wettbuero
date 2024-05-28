@@ -1,6 +1,7 @@
 package Entities;
 
 import com.example.Semester_Projekt_Wettbuero_Server.Enums.RaceStatus;
+import com.example.Semester_Projekt_Wettbuero_Server.Enums.RaceType;
 import com.example.Semester_Projekt_Wettbuero_Server.Enums.Terrain;
 import com.example.Semester_Projekt_Wettbuero_Server.Enums.Weather;
 import lombok.Getter;
@@ -10,7 +11,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Document(collection = "Horserace-Data")
@@ -40,4 +40,8 @@ public class Horserace {
     private int estimatedDuration;
 
     private RaceStatus status;
+
+    private RaceType type;
+
+    private Horse winner;
 }

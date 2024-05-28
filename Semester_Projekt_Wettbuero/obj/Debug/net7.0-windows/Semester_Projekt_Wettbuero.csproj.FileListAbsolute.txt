@@ -21,3 +21,5 @@ C:\Users\chris\OneDrive\Desktop\Semester_Projekt_Wettbuero\obj\Debug\net7.0-wind
 C:\Users\chris\OneDrive\Desktop\Semester_Projekt_Wettbuero\bin\Debug\net7.0-windows\Newtonsoft.Json.dll
 C:\Users\chris\OneDrive\Desktop\Semester_Projekt_Wettbuero\obj\Debug\net7.0-windows\Semester_Projekt_Wettbuero.csproj.AssemblyReference.cache
 C:\Users\chris\OneDrive\Desktop\Semester_Projekt_Wettbuero\obj\Debug\net7.0-windows\Semester_Projekt_Wettbuero.csproj.CopyComplete
+C:\Users\chris\OneDrive\Desktop\Semester_Projekt_Wettbuero\obj\Debug\net7.0-windows\BetWindow.g.cs
+C:\Users\chris\OneDrive\Desktop\Semester_Projekt_Wettbuero\obj\Debug\net7.0-windows\BetWindow.baml

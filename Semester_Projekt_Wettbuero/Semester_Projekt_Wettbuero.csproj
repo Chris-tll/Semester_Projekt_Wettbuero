@@ -9,10 +9,21 @@
 
   <ItemGroup>
     <None Remove="confirm_icon.png" />
+    <None Remove="dark-wood-plank.jpeg" />
+    <None Remove="dograce.jpg" />
+    <None Remove="Dograce_button.png" />
     <None Remove="email_icon.png" />
+    <None Remove="horserace.jpg" />
+    <None Remove="Horserace_button.png" />
     <None Remove="lock_icon.png" />
+    <None Remove="login_register_background.png" />
+    <None Remove="logo_betting-office.png" />
     <None Remove="phone_icon.png" />
+    <None Remove="racetrack.jpg" />
     <None Remove="reload_icon.png" />
+    <None Remove="SetBetBackground.png" />
+    <None Remove="snailrace.jpg" />
+    <None Remove="Snailrace_button.png" />
     <None Remove="user_icon.png" />
   </ItemGroup>
 
@@ -22,10 +33,21 @@
 
   <ItemGroup>
     <Resource Include="confirm_icon.png" />
+    <Resource Include="dark-wood-plank.jpeg" />
+    <Resource Include="dograce.jpg" />
+    <Resource Include="Dograce_button.png" />
     <Resource Include="email_icon.png" />
+    <Resource Include="horserace.jpg" />
+    <Resource Include="Horserace_button.png" />
     <Resource Include="lock_icon.png" />
+    <Resource Include="login_register_background.png" />
+    <Resource Include="logo_betting-office.png" />
     <Resource Include="phone_icon.png" />
+    <Resource Include="racetrack.jpg" />
     <Resource Include="reload_icon.png" />
+    <Resource Include="SetBetBackground.png" />
+    <Resource Include="snailrace.jpg" />
+    <Resource Include="Snailrace_button.png" />
     <Resource Include="user_icon.png" />
   </ItemGroup>
 

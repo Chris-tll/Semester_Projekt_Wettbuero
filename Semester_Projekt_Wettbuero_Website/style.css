@@ -1,0 +1,371 @@
+/* Basic reset for margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cinzel', serif;
+}
+
+/* Background styling */
+body {
+    background: linear-gradient(to bottom right, #ffffff, #f8f3e7); /* Light gradient with subtle transition */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #000000; /* Black text */
+}
+
+/*-----------------------------------------Navbar styling-----------------------------------------*/
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Black background with 85% opacity */
+    backdrop-filter: blur(10px); /* Blur effect */
+    padding: 1rem 1.5rem;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+/* Navbar Content (e.x "HOME", "ABOUT") */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* Navbar Title for the left side */
+.navbar-titel {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #b18e59;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+/* Navbar Content itself */
+.navbar-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.3rem;
+}
+
+/*-----------------------------------------Main content styling-----------------------------------------*/
+.content {
+    padding: 1rem;
+    margin-top: 4rem; /* Add margin to ensure content is not hidden behind the navbar */
+    color: #000000;
+}
+
+.content-header {
+    display: flex;
+    align-items: flex-start; /* Align items to the start */
+    justify-content: space-between;
+}
+
+.content-text {
+    flex: 1;
+    margin-top: 90px;
+    margin-right: 20px; /* Reduce the margin between text and logo */
+    margin-left: 10px;
+}
+
+.content-logo {
+    margin-top: 0px;
+}
+
+.logo {
+    max-width: 400px; /* Further reduced max width */
+    right: 80px;
+    top: 100px;
+}
+
+h1 {
+    font-size: 2.5rem; /* Reduced font size */
+    margin-bottom: 0.5rem;
+    color: #b18e59;
+}
+
+h2 {
+    font-size: 1.6rem; /* Added subtitle with smaller font size */
+    margin-bottom: 1rem;
+    margin-left: 15px;
+    color: #000000;
+}
+
+p {
+    font-size: 1.2rem; /* Reduced font size */
+    line-height: 1.5;
+    padding-left: 5px;
+    margin-left: 15px;
+    color: #000000;
+}
+
+/*-----------------------------------------Container-----------------------------------------*/
+.title-container {
+    text-align: center;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    line-height: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+/*-----------------------------------------Race Explanation Section-----------------------------------------*/
+.race-explanation {
+    padding: 2rem;
+    text-align: center;
+    margin-top: 10rem;
+    height: 2800px;
+}
+
+.race-item {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15rem;
+    margin-top: 10rem;
+}
+
+.race-text {
+    display: flex;
+    flex-direction: col;
+    transform: rotate(315deg); /* Rotate to make it a diamond shape */
+}
+
+/*-----------------------------------------Horserace-----------------------------------------*/
+.quadrat_horserace {
+    width: 600px;
+    height: 600px;
+    border: 5px solid #b18e59;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotate(45deg); /* Rotate to make it a diamond shape */
+    position: absolute;
+    background: url('mixed_tracks.png') no-repeat center center; /* Add your image path here */
+    background-size: cover; /* Ensure the image covers the quadrat */
+    transition: transform 1s, width 1s, height 1s;
+}
+
+.quadrat_horserace.active {
+    transform: rotate(45deg) translateX(300px) translateY(-200px); /* Move to the right */
+    width: 400px; /* Make it smaller */
+    height: 400px; /* Make it smaller */
+}
+
+.quadrat_horserace p {
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent background for readability */
+    padding: 1rem;
+    font-weight: 500;
+    transition: transform 1s, width 1s, height 1s;
+}
+
+.horserace_text.active {
+    transform: translateX(-800px) translateY(100px); /* Move to the right */
+    width: 600px; /* Make it smaller */
+    height: 500px; /* Make it smaller */
+    background: transparent;
+}
+
+.horserace_title.active {
+    transform: translateX(-600px) translateY(80px); /* Move to the right */
+    font-size: 1.6rem; /* Added subtitle with smaller font size */
+    color: #000000;
+}
+
+/*-----------------------------------------Dograce-----------------------------------------*/
+.quadrat_dograce {
+    width: 600px;
+    height: 600px;
+    border: 5px solid #b18e59;
+    margin: 0 auto;
+    margin-top: 37.5rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotate(45deg); /* Rotate to make it a diamond shape */
+    position: absolute;
+    background: url('dog_tracks.png') no-repeat center center; /* Add your image path here */
+    background-size: cover; /* Ensure the image covers the quadrat */
+    transition: transform 1s, width 1s, height 1s;
+}
+
+.quadrat_dograce.active {
+    transform: rotate(45deg) translateX(-300px) translateY(200px); /* Move to the right */
+    width: 400px; /* Make it smaller */
+    height: 400px; /* Make it smaller */
+}
+
+.quadrat_dograce p {
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent background for readability */
+    padding: 1rem;
+    font-weight: 500;
+    transition: transform 1s, width 1s, height 1s;
+}
+
+.dograce_text.active {
+    transform: translateX(650px) translateY(0px); /* Move to the right */
+    width: 600px; /* Make it smaller */
+    height: 500px; /* Make it smaller */
+    background: transparent;
+}
+
+.dograce_title.active {
+    transform: translateX(820px) translateY(-20px); /* Move to the right */
+    font-size: 1.6rem; /* Added subtitle with smaller font size */
+    color: #000000;
+}
+
+/*-----------------------------------------Snailrace-----------------------------------------*/
+.quadrat_snailrace {
+    width: 600px;
+    height: 600px;
+    border: 5px solid #b18e59;
+    margin: 0 auto;
+    margin-top: 75rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotate(45deg); /* Rotate to make it a diamond shape */
+    position: absolute;
+    background: url('snail_tracks.png') no-repeat center center; /* Add your image path here */
+    background-size: cover; /* Ensure the image covers the quadrat */
+    transition: transform 1s, width 1s, height 1s;
+}
+
+.quadrat_snailrace.active {
+    transform: rotate(45deg) translateX(100px) translateY(-400px); /* Move to the right */
+    width: 400px; /* Make it smaller */
+    height: 400px; /* Make it smaller */
+}
+
+.quadrat_snailrace p {
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent background for readability */
+    padding: 1rem;
+    font-weight: 500;
+    transition: transform 1s, width 1s, height 1s;
+}
+
+.snailrace_text.active {
+    transform: translateX(-800px) translateY(50px); /* Move to the right */
+    width: 600px; /* Make it smaller */
+    height: 500px; /* Make it smaller */
+    background: transparent;
+}
+
+.snailrace_title.active {
+    transform: translateX(-600px) translateY(30px); /* Move to the right */
+    font-size: 1.6rem; /* Added subtitle with smaller font size */
+    color: #000000;
+}
+
+/*-----------------------------------------Others-----------------------------------------*/
+.smooth_transition {
+    transition: width 5s, heigth 5s;
+}
+
+/*-----------------------------------------About The Game-----------------------------------------*/
+.game-explanation h2 {
+    text-align: center;
+}
+
+.game-explanation p {
+    text-align: center;
+}
+
+.game-explanation {
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 5%;
+    margin-bottom: 200px;
+}
+
+/*-----------------------------------------Game Rules-----------------------------------------*/
+.rules-title {
+    text-align: center;
+}
+
+.rules {
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 5%;
+    margin-bottom: 200px;
+}
+
+
+/*-----------------------------------------Footer-----------------------------------------*/
+.footer {
+    background: rgba(0, 0, 0, 0.85); /* Black background with 85% opacity */
+    backdrop-filter: blur(10px); /* Blur effect */
+    color: #ecf0f1;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #b18e59;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section li,
+.footer-section a {
+    color: #bdc3c7;
+    font-size: 0.9em;
+    line-height: 1.6em;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: #ecf0f1;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-bottom {
+    border-top: 1px solid #7f8c8d;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.8em;
+    color: #b18e59;
+}

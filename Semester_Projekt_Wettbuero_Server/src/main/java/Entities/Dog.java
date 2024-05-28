@@ -1,12 +1,13 @@
 package Entities;
 
+import lombok.Getter;
 import lombok.NonNull;
-import org.springframework.data.annotation.Id;
+import lombok.Setter;
 
+@Getter @Setter
 public class Dog {
-    @Id
     @NonNull
-    private String id;
+    private int startNum;
 
     private String name;
 
@@ -29,4 +30,6 @@ public class Dog {
     private int terrain_influence;
 
     private int chance_of_winning;
+
+    private double multiplier;
 }
