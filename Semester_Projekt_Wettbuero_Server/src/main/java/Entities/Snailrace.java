@@ -42,4 +42,6 @@ public class Snailrace {
     private RaceStatus status;
 
     private RaceType type;
+
+    private Snail winner;
 }

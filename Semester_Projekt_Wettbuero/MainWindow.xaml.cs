@@ -26,6 +26,7 @@ namespace Semester_Projekt_Wettbuero
         List<Horserace> hraces = new List<Horserace>();
         List<Dograce> drace = new List<Dograce>();
         List<Snailrace> srace = new List<Snailrace>();
+        List<Bet> bets = new List<Bet>();
 
         string checkListView = "", raceMode = "", participantType = "", raceId = "", raceStatus = "";
 
@@ -53,6 +54,19 @@ namespace Semester_Projekt_Wettbuero
             srace = await ServerConnection.INSTANCE.GetSnailraceAsync(); //Loads all Snailraces from db
         }
 
+        //-------------LOAD ALL BETS---------------
+        public async void Load_Bets()
+        {
+            bets = await ServerConnection.INSTANCE.GetBetsById(user.id);
+            foreach (Bet b in bets)
+            {
+                if (b != null)
+                {
+                    ListView_ActiveBets.Items.Add(b.getBetInfo());
+                }
+            } 
+        }
+
         //-------------LOGIN-BTN---------------
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -72,6 +86,8 @@ namespace Semester_Projekt_Wettbuero
 
             TextBlock_StartPage_Money.Text = user?.money.ToString() + "€";
             TextBlock_StartPage_Username.Text = user?.username.ToString();
+
+            Load_Bets();
         }
 
         //-------------PasswordChange Hide Placeholders-------------
@@ -267,6 +283,8 @@ namespace Semester_Projekt_Wettbuero
             Snailrace_grid.Visibility = Visibility.Hidden;
 
             game_grid.Visibility = Visibility.Visible;
+            Load_Bets();
+            TextBlock_StartPage_Money.Text = user?.money.ToString() + "€";
         }
 
         //-------------HORSERACE-------------

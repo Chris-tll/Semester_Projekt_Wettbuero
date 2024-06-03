@@ -21,6 +21,7 @@ public class Bet {
     private double money_bet;
     private ParticipantType participantType;
     private String participantName;
+    private int startNum;
     private RaceType raceType;
     private String raceId;
     private String userId;

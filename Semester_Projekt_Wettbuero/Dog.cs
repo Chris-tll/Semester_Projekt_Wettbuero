@@ -34,11 +34,9 @@ namespace Semester_Projekt_Wettbuero
 
         public double multiplier { get; set; }
 
-        public Dog winner { get; set; }
-
         public string getParticipantInfo()
         {
-            string s = "Name: " + this.name + "\n" + "Age: " + this.age + " years old\n" +
+            string s = "StartNum.: " + this.startNum + "\n" + "Name: " + this.name + "\n" + "Age: " + this.age + " years old\n" +
                 "Wins: " + this.wins + "\n" + "Participated in races: " + this.took_place_in_races + " times\n" +
                 "Got ranked: " + got_ranked + " times \n" + "Fitness level: " + this.fitness_level + "\n" +
                 "Experience level: " + this.experience_level + "\n" + "Trainer quality: " + this.trainer_quality + "% \n" +

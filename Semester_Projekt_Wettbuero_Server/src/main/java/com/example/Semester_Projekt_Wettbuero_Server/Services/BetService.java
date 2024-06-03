@@ -28,6 +28,10 @@ public class BetService {
         return betList;
     }
 
+    public List<Bet> getAllBets() {
+        return betRepository.findAll();
+    }
+
     public void createBet(Bet bet) {
         betRepository.save(bet);
     }

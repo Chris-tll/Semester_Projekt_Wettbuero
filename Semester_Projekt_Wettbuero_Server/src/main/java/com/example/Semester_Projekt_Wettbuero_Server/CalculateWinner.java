@@ -7,46 +7,53 @@ import java.util.List;
 import java.util.Random;
 
 public class CalculateWinner {
-   /* public Object calcWinner(Horserace horserace, Snailrace snailrace, Dograce dograce){
-        List<Object> participantList = new ArrayList<>();
-        double totalChance = 0;
+   public void calcWinner(Horserace horserace, Snailrace snailrace, Dograce dograce){
+        int chance = 0;
+        Random r = new Random();
 
         if (horserace != null) {
-            participantList.addAll(horserace.getParticipants());
-            totalChance = participantList.stream().mapToDouble(Horse::getChanceOfWinning).sum();
-        } else if (dograce != null) {
-            participantList.addAll(dograce.getParticipants());
-            totalChance = participantList.stream().mapToDouble(Animal::getChance_of_winning).sum();
-        } else if (snailrace != null) {
-            participantList.addAll(snailrace.getParticipants());
-            totalChance = participantList.stream().mapToDouble(Animal::getChance_of_winning).sum();
-        }
-
-        // Berechnung der Summe aller "Chance of winning"
-
-
-        // Berechnung der relativen Wahrscheinlichkeit für jedes Pferd
-        double[] relativeProbabilities = new double[participantList.size()];
-        for (int i = 0; i < participantList.size(); i++) {
-            relativeProbabilities[i] = participantList.get(i).getChance_of_winning() / totalChance;
-        }
-
-        // Generierung einer Zufallszahl zwischen 0 und 1
-        Random random = new Random();
-        double randomNumber = random.nextDouble();
-
-        // Zufällige Auswahl eines Gewinners basierend auf der relativen Wahrscheinlichkeit
-        double cumulativeProbability = 0;
-        for (int i = 0; i < participantList.size(); i++) {
-            cumulativeProbability += relativeProbabilities[i];
-            if (randomNumber <= cumulativeProbability) {
-                return participantList.get(i); // Gewinner gefunden
+            for (Horse h : horserace.getParticipants()) {
+                chance = r.nextInt(1, 100);
+                h.setWinner_chance((double) h.getChance_of_winning() / chance);
             }
+
+            Horse tmp = horserace.getParticipants().get(0);
+            for (Horse h : horserace.getParticipants()) {
+                if (h.getWinner_chance() > tmp.getWinner_chance()) {
+                    tmp = h;
+                }
+            }
+            horserace.setWinner(tmp);
         }
 
-        // Sollte niemals erreicht werden, falls keine Pferde vorhanden sind oder die Summe der Chancen 0 ist
-        return null;
-    }*/
+        if (dograce != null) {
+            for (Dog d : dograce.getParticipants()) {
+                chance = r.nextInt(1, 100);
+                d.setWinner_chance((double) d.getChance_of_winning() / chance);
+            }
 
+            Dog tmp = dograce.getParticipants().get(0);
+            for (Dog d : dograce.getParticipants()) {
+                if (d.getWinner_chance() > tmp.getWinner_chance()) {
+                    tmp = d;
+                }
+            }
+            dograce.setWinner(tmp);
+        }
 
+        if (snailrace != null) {
+            for (Snail s : snailrace.getParticipants()) {
+                chance = r.nextInt(1, 100);
+                s.setWinner_chance((double) s.getChance_of_winning() / chance);
+            }
+
+            Snail tmp = snailrace.getParticipants().get(0);
+            for (Snail s : snailrace.getParticipants()) {
+                if (s.getWinner_chance() > tmp.getWinner_chance()) {
+                    tmp = s;
+                }
+            }
+            snailrace.setWinner(tmp);
+        }
+   }
 }

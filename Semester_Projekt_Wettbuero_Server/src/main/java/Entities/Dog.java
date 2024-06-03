@@ -32,4 +32,7 @@ public class Dog {
     private int chance_of_winning;
 
     private double multiplier;
+
+
+    private double winner_chance;
 }

@@ -36,11 +36,9 @@ namespace Semester_Projekt_Wettbuero
 
         public double multiplier { get; set; }
 
-        public Snail winner { get; set; }
-
         public string getParticipantInfo()
         {
-            string s = "Name: " + this.name + "\n" + "Age: " + this.age + " years old\n" +
+            string s = "StartNum.: " + this.startNum + "\n" + "Name: " + this.name + "\n" + "Age: " + this.age + " years old\n" +
                 "Size: " + this.size + " cm\n" + "Speed: " + this.speed + "cm/s\n" +
                 "Stamina: " + this.stamina + "\n" + "Reaction: " + this.reaction + "s\n" +
                 "Weather influence: " + this.weather_influence + "\n" +

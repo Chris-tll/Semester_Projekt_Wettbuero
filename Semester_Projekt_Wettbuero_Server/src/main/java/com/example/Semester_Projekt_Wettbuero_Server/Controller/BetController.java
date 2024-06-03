@@ -16,7 +16,10 @@ public class BetController {
 
     //GET MAPPING
     @GetMapping("/{id}")
-    public List<Bet> getBetsByUsername(@PathVariable String id) { return betService.getBetsById(id); }
+    public List<Bet> getBetsById(@PathVariable String id) { return betService.getBetsById(id); }
+
+    @GetMapping
+    public List<Bet> getAllBets() { return betService.getAllBets(); }
 
     @PostMapping
     public void createBet(@RequestBody Bet bet) {

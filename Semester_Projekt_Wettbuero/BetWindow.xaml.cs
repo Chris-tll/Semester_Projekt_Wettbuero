@@ -26,6 +26,7 @@ namespace Semester_Projekt_Wettbuero
     {
         User user = null;
         string raceMode = "", participantType = "", raceId = "", name = "";
+        int startNum = 0;
         public BetWindow(string loc, User u, string mode, string participant, string id)
         {
             InitializeComponent();
@@ -43,8 +44,8 @@ namespace Semester_Projekt_Wettbuero
 
             string[] parts = tmp.Split('\n');
 
-            // Extract the location from the second part after removing leading and trailing spaces
-            name = parts[0].Substring("Name: ".Length).Trim();
+            startNum = Convert.ToInt32(parts[0].Substring("StartNum.: ".Length).Trim());
+            name = parts[1].Substring("Name: ".Length).Trim();
             Btn_SetBet.IsEnabled = true;
         }
 
@@ -89,7 +90,9 @@ namespace Semester_Projekt_Wettbuero
         {
             if (Convert.ToInt32(TextBox_SetBet.Text) <= user.money && TextBox_SetBet.Text != null) {
                 await ServerConnection.INSTANCE.CreateBet(Convert.ToDouble(TextBox_SetBet.Text), 
-                    participantType, name, raceMode, raceId, user.id, "OUTSTANDING");
+                    participantType, name, startNum, raceMode, raceId, user.id, "OUTSTANDING");
+                user.money -= Convert.ToInt32(TextBox_SetBet.Text);
+                await ServerConnection.INSTANCE.UpdateUser(user);
             }
             else
             {

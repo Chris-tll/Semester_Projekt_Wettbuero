@@ -36,5 +36,5 @@ public class Snail {
 
     private double multiplier;
 
-    private Snail winner;
+    private double winner_chance;
 }

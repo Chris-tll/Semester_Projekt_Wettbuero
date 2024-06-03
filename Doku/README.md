@@ -949,7 +949,7 @@ Die tecnische Umsetzung des Projekts erfolgte in mehreren Schritten und mithilfe
 - WebApp: Die WebApp, welche alle Erklaerungen zum Wettbuero bereit haelt, ebenso wie das Dashboard und weiteres, wurde mit HTML, CSS und JavaScript programmiert.
 
 #### Worte der Developerin
-Leider wurde das Spiel nicht ganz fertig aufgrund von ein paar Verzoegerungen wie Krankheiten oder aehnliches. Jedoch versucht **Race Royale Bets** das Spiel trotzdem fertigzustellen. Daher nicht wundern, falls manche Funktionen noch nicht dabei sind oder nicht ganz funktionieren.
+Das Spiel ist fertig. Es fehlt nur die "Responsivenes" der Website. Auch das wird in Zukunft, also im naechsten Release hinzugefuegt.
 
 ### Zusammenfassung
 Die erste Version von **Race Royale Bets** ist fertiggestellt. Diese innovative Wettplatform bietet eine benutzerfreundliche und moderne Oberflaeche, die eine einfache Navigation ermoeglicht. Ein Algorithmus versorgt dabei das Wettbuero stets mit fuenf neuen Rennen per Renntyp, was fuer kontinuierliche Spannung und Vielfalt sorgt. Technologisch basiert **Race Royale Bets** auf einem robusten Java-Server, einer performanten C#-Anwendung und einer dynamischen WebApp, die mit HTML, CSS und JavaScript entwickelt wurde.

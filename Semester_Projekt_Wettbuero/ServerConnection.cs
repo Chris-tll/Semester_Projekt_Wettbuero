@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Security;
+using System.Security.AccessControl;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -116,8 +117,8 @@ namespace Semester_Projekt_Wettbuero
             string requestUrl = $"{baseUrl}/users/email/{email}";
 
             response = await client.GetAsync(requestUrl);
-            
-            if(response.IsSuccessStatusCode)
+
+            if (response.IsSuccessStatusCode)
             {
                 try
                 {
@@ -151,7 +152,7 @@ namespace Semester_Projekt_Wettbuero
             string requestUrl = $"{baseUrl}/users/password/{email}/{password}";
             response = await client.GetAsync(requestUrl);
 
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 try
                 {
@@ -183,7 +184,79 @@ namespace Semester_Projekt_Wettbuero
 
         }
 
+        public async Task<bool> UpdateUser(User user)
+        {
+            string apiUrl = baseUrl + "/users/" + user.id;
+
+            try
+            {
+                var u = new
+                {
+                    firstname = user.firstname,
+                    lastname = user.lastname,
+                    username = user.username,
+                    gender = user.gender,
+                    age = user.age,
+                    role = user.role,
+                    phone = user.phone,
+                    email = user.email,
+                    password = user.password,
+                    money = user.money,
+                    money_loss = user.money_loss,
+                    money_win = user.money_win,
+                    allBets = user.allBets
+                };
+
+                using (var httpClient = new HttpClient())
+                {
+                    var content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
+
+                    var response = await httpClient.PutAsync(apiUrl, content);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occured! Error: {ex.Message}");
+                return false;
+            }
+        }
+
         //----------------------------BETS----------------------------
+        public async Task<List<Bet>> GetAllBets()
+        {
+            string requestUrl = $"{baseUrl}/bet";
+
+            response = await client.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    string values = await response.Content.ReadAsStringAsync();
+                    if (values != "")
+                    {
+                        List<Bet> bets = JsonSerializer.Deserialize<List<Bet>>(values);
+                        return bets;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error while reloading bets!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.StatusCode + " " + response.ReasonPhrase, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
         public async Task<List<Bet>> GetBetsById(string id)
         {
             string requestUrl = $"{baseUrl}/bet/{id}";
@@ -220,7 +293,7 @@ namespace Semester_Projekt_Wettbuero
         }
 
         public async Task<bool> CreateBet(double money_bet, string participantType,
-            string participantName, string raceType, string raceId, string userId, string status)
+            string participantName, int startNum, string raceType, string raceId, string userId, string status)
         {
             string apiUrl = baseUrl + "/bet";
 
@@ -234,13 +307,14 @@ namespace Semester_Projekt_Wettbuero
                     {
                         MessageBox.Show("You can not bet on the same race twice!!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
-                    }                   
+                    }
                 }
                 var setBet = new
                 {
                     money_bet = money_bet,
                     participantType = participantType,
                     participantName = participantName,
+                    startNum = startNum,
                     raceType = raceType,
                     raceId = raceId,
                     userId = userId,
@@ -278,7 +352,7 @@ namespace Semester_Projekt_Wettbuero
 
             response = await client.GetAsync(requestUrl);
 
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 try
                 {

@@ -1,11 +1,10 @@
 package com.example.Semester_Projekt_Wettbuero_Server.Services;
 
-import Entities.Dograce;
-import Entities.Horse;
-import Entities.Horserace;
+import Entities.*;
 import com.example.Semester_Projekt_Wettbuero_Server.CalculateWinner;
 import com.example.Semester_Projekt_Wettbuero_Server.Enums.*;
 import com.example.Semester_Projekt_Wettbuero_Server.Repositories.HorseraceRepository;
+import com.example.Semester_Projekt_Wettbuero_Server.Repositories.UserRepository;
 import com.example.Semester_Projekt_Wettbuero_Server.ScheduleTask;
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,10 @@ public class HorseraceService {
 
     @Autowired
     private HorseraceRepository horseraceRepository;
+    private CalculateWinner calculateWinner = new CalculateWinner();
 
-    private ScheduleTask scheduleTask;
-
-    private CalculateWinner calculateWinner;
-
-    private Horse winner;
+    @Autowired
+    private UserRepository userRepository;
 
     //Get all Races
     public List<Horserace> getAllRaces() { return horseraceRepository.findAll(); }
@@ -274,9 +271,30 @@ public class HorseraceService {
         for (Horserace h : getAllRaces()) {
             if(h.getEnd().isBefore(current)){
                 h.setStatus(RaceStatus.FINISHED);
+                calculateWinner.calcWinner(h, null, null);
                 horseraceRepository.save(h);
-                //createRace();
-                //winner = (Horse) calculateWinner.calcWinner(h);
+
+                for (User u : userRepository.findAll()) {
+                    if (u.getAllBets() != null){
+                        for (Bet b : u.getAllBets()) {
+                            if (b.getRaceType() == h.getType()) {
+                                if (h.getId().equals(b.getRaceId())) {
+                                    if (b.getStartNum() == h.getWinner().getStartNum()) {
+                                        u.setMoney(u.getMoney() + (b.getMoney_bet() * h.getWinner().getMultiplier()));
+                                        b.setStatus(BetStatus.WON);
+                                        u.getAllBets().add(b);
+                                        userRepository.save(u);
+                                    }
+                                    else {
+                                        b.setStatus(BetStatus.LOST);
+                                        u.getAllBets().add(b);
+                                        userRepository.save(u);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

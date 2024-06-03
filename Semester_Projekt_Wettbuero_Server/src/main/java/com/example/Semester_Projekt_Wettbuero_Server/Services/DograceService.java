@@ -1,10 +1,10 @@
 package com.example.Semester_Projekt_Wettbuero_Server.Services;
 
-import Entities.Dog;
-import Entities.Dograce;
-import Entities.Horserace;
+import Entities.*;
+import com.example.Semester_Projekt_Wettbuero_Server.CalculateWinner;
 import com.example.Semester_Projekt_Wettbuero_Server.Enums.*;
 import com.example.Semester_Projekt_Wettbuero_Server.Repositories.DograceRepository;
+import com.example.Semester_Projekt_Wettbuero_Server.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,10 @@ public class DograceService {
 
     @Autowired
     private DograceRepository dograceRepository;
+    private CalculateWinner calculateWinner = new CalculateWinner();
+
+    @Autowired
+    private UserRepository userRepository;
 
     //Get all Races
     public List<Dograce> getAllRaces() { return dograceRepository.findAll(); }
@@ -261,7 +265,30 @@ public class DograceService {
         for (Dograce d : getAllRaces()) {
             if(d.getEnd().isBefore(current)){
                 d.setStatus(RaceStatus.FINISHED);
+                calculateWinner.calcWinner(null, null, d);
                 dograceRepository.save(d);
+
+                for (User u : userRepository.findAll()) {
+                    if (u.getAllBets() != null){
+                        for (Bet b : u.getAllBets()) {
+                            if (b.getRaceType() == d.getType()) {
+                                if (d.getId().equals(b.getRaceId())) {
+                                    if (b.getStartNum() == d.getWinner().getStartNum()) {
+                                        u.setMoney(u.getMoney() + (b.getMoney_bet() * d.getWinner().getMultiplier()));
+                                        b.setStatus(BetStatus.WON);
+                                        u.getAllBets().add(b);
+                                        userRepository.save(u);
+                                    }
+                                    else {
+                                        b.setStatus(BetStatus.LOST);
+                                        u.getAllBets().add(b);
+                                        userRepository.save(u);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
