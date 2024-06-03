@@ -23,6 +23,9 @@ public class UserController {
     @GetMapping
     public List<User> getAllUsers() { return userService.getAllUser(); }
 
+    @GetMapping("/topUsers")
+    public List<User> getTopUser() { return userService.getTopUser(); }
+
     @GetMapping("/id/{id}")
     public User getUserById(@PathVariable String id) { return userService.getUserById(id); }
 

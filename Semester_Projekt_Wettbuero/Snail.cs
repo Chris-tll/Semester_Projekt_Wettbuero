@@ -41,9 +41,9 @@ namespace Semester_Projekt_Wettbuero
         public string getParticipantInfo()
         {
             string s = "Name: " + this.name + "\n" + "Age: " + this.age + " years old\n" +
-                "Size: " + this.size + "\n" + "Speed: " + this.speed + "cm/s\n" +
+                "Size: " + this.size + " cm\n" + "Speed: " + this.speed + "cm/s\n" +
                 "Stamina: " + this.stamina + "\n" + "Reaction: " + this.reaction + "s\n" +
-                "Weather influence" + this.weather_influence + "\n" +
+                "Weather influence: " + this.weather_influence + "\n" +
                 "Unpredictability: " + this.unpredictability + "\n" + "Environment influence: " + this.environment_influence + "\n" +
                 "Curiosity: " + this.curiosity + "\n" + "Temperament: " + this.temperament + "\n" +
                 "Chance of Winning: " + this.chance_of_winning + "\n" + "Multiplier: " + this.multiplier + "\n\n";

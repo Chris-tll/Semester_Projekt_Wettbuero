@@ -223,7 +223,7 @@ public class DograceService {
             }
         }
 
-        if (count < 5) {
+        if (count < 5 && checkList.size() <= 11) {
             createRace();
             count = 0;
         }
@@ -234,7 +234,7 @@ public class DograceService {
             }
         }
 
-        if (count > 5) {
+        if (count > 5 && checkList.size() > 10) {
             Dograce tmp = null;
 
             for (Dograce drace : checkList) {
@@ -243,7 +243,11 @@ public class DograceService {
                     break;
                 }
             }
-            cancelRace(tmp.getId());
+
+            if (tmp != null){
+                cancelRace(tmp.getId());
+            }
+
             count = 0;
         }
 

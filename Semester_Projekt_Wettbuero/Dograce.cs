@@ -9,6 +9,8 @@ namespace Semester_Projekt_Wettbuero
 {
     class Dograce
     {
+        public string id { get; set; }
+
         [JsonPropertyName("name")]
         public string racename { get; set; }
 

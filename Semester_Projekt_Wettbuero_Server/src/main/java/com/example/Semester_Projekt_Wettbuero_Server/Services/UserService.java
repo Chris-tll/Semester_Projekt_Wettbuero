@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -20,8 +23,18 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // GET
+    //Get All User
     public List<User> getAllUser() { return userRepository.findAll(); }
+
+    //Get Top 5 User
+    public List<User> getTopUser() {
+        List<User> allUser = getAllUser();
+
+        allUser.sort(Comparator.comparingDouble(User::getMoney).reversed());
+        List<User> topUser = allUser.subList(0, Math.min(5, allUser.size()));
+
+        return topUser;
+    }
 
     public User getUserById(String id) { return userRepository.findById(id).orElse(null); }
 

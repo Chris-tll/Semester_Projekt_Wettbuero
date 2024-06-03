@@ -211,7 +211,7 @@
 
 
 
-        <Grid x:Name="game_grid" Visibility="Visible">
+        <Grid x:Name="game_grid" Visibility="Hidden">
             <Grid.Background>
                 <ImageBrush ImageSource="racetrack.jpg" />
             </Grid.Background>

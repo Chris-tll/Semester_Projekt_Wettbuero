@@ -305,6 +305,27 @@ p {
     margin-bottom: 200px;
 }
 
+/*-----------------------------------------Data-----------------------------------------*/
+.player-dashboard {
+    text-align: center;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 5%;
+    margin-bottom: 200px;
+}
+
+.player-title {
+    margin-top: 30px;
+}
+
+.player-score {
+    text-align: center;
+    list-style: none;
+}
+
+.game-data {
+    text-align: center;
+}
 
 /*-----------------------------------------Footer-----------------------------------------*/
 .footer {

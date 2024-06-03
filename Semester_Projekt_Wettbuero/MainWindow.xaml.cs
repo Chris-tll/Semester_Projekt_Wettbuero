@@ -326,18 +326,27 @@ namespace Semester_Projekt_Wettbuero
             {
                 tmp = ListView_Horserace_Finished.SelectedItem as string; 
             }
-            
+
             // Split the string by newline characters ('\n')
-            string[] parts = tmp.Split('\n');
+            string[] parts = new string[100];
 
-            // Extract the location from the second part after removing leading and trailing spaces
-            string location = parts[1].Substring("Location: ".Length).Trim();
+            if (tmp != null)
+            {
+                parts = tmp.Split('\n');
+                // Extract the location from the second part after removing leading and trailing spaces
+                string location = parts[1].Substring("Location: ".Length).Trim();
 
-            Horserace h = await ServerConnection.INSTANCE.GetHorseraceByLocation(location);
+                Horserace h = await ServerConnection.INSTANCE.GetHorseraceByLocation(location);
 
-            raceId = h.id;
-            raceStatus = h.status;
-            ListView_Horserace_Info.Items.Add(h.RaceInformations());
+                
+
+                if (h != null)
+                {
+                    raceId = h.id;
+                    raceStatus = h.status;
+                    ListView_Horserace_Info.Items.Add(h.RaceInformations());
+                }
+            }            
         }
 
         private void Btn_Horserace_Reload_Races_Click(object sender, RoutedEventArgs e)
@@ -414,7 +423,13 @@ namespace Semester_Projekt_Wettbuero
 
             Dograce d = await ServerConnection.INSTANCE.GetDograceByLocation(location);
 
-            ListView_Dograce_Info.Items.Add(d.RaceInformations());
+            raceStatus = d.status;
+            raceId = d.id;
+
+            if (d != null)
+            {
+                ListView_Dograce_Info.Items.Add(d.RaceInformations());
+            }
         }
 
         private void ListView_Dograce_Upcoming_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -504,7 +519,12 @@ namespace Semester_Projekt_Wettbuero
 
             Snailrace s = await ServerConnection.INSTANCE.GetSnailraceByLocation(location);
 
-            ListView_Snailrace_Info.Items.Add(s.RaceInformations());
+            if (s != null)
+            {
+                raceId = s.id;
+                raceMode = s.status;
+                ListView_Snailrace_Info.Items.Add(s.RaceInformations());
+            }
         }
 
         private void Btn_Snailrace_Reload_Races_Click(object sender, RoutedEventArgs e)

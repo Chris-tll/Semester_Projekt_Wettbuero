@@ -66,6 +66,11 @@ public class SnailraceService {
 
         //Es wird ein zuäflliger Wert generiert für das erste Prefix der Schnecke
         //Danach wird das Enum an dieser Stelle ausgewählt
+        r = random.nextInt(Terrain.values().length);
+        snailrace.setTerrain(Terrain.values()[r]);
+
+        //Es wird ein zuäflliger Wert generiert für das erste Prefix der Schnecke
+        //Danach wird das Enum an dieser Stelle ausgewählt
         r = random.nextInt(Environment.values().length);
         snailrace.setEnvironment(Environment.values()[r]);
 
@@ -247,7 +252,7 @@ public class SnailraceService {
             }
         }
 
-        if (count < 5) {
+        if (count < 5 && checkList.size() <= 11) {
             createRace();
             count = 0;
         }
@@ -258,7 +263,7 @@ public class SnailraceService {
             }
         }
 
-        if (count > 5) {
+        if (count > 5 && checkList.size() > 10) {
             Snailrace tmp = null;
 
             for (Snailrace srace : checkList) {
@@ -267,7 +272,11 @@ public class SnailraceService {
                     break;
                 }
             }
-            cancelRace(tmp.getId());
+
+            if (tmp != null) {
+                cancelRace(tmp.getId());
+            }
+
             count = 0;
         }
 
@@ -282,7 +291,7 @@ public class SnailraceService {
             if(s.getEnd().isBefore(current)){
                 s.setStatus(RaceStatus.FINISHED);
                 snailraceRepository.save(s);
-                createRace();
+                //createRace();
             }
         }
     }

@@ -238,7 +238,7 @@ public class HorseraceService {
             }
         }
 
-        if (count < 5) {
+        if (count < 5 && checkList.size() <= 11) {
             createRace();
             count = 0;
         }
@@ -249,7 +249,7 @@ public class HorseraceService {
             }
         }
 
-        if (count > 5) {
+        if (count > 5 && checkList.size() > 10) {
             Horserace tmp = null;
 
             for (Horserace hrace : checkList) {
@@ -258,7 +258,9 @@ public class HorseraceService {
                     break;
                 }
             }
-            cancelRace(tmp.getId());
+            if (tmp != null){
+                cancelRace(tmp.getId());
+            }
             count = 0;
         }
 
@@ -273,7 +275,7 @@ public class HorseraceService {
             if(h.getEnd().isBefore(current)){
                 h.setStatus(RaceStatus.FINISHED);
                 horseraceRepository.save(h);
-                createRace();
+                //createRace();
                 //winner = (Horse) calculateWinner.calcWinner(h);
             }
         }
